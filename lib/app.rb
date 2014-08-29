@@ -1,7 +1,9 @@
-require 'sinatra'
+require 'rubygems'
+require 'Sinatra'
 
 
 set :port, 8080
+
 
 def reverse string
 
