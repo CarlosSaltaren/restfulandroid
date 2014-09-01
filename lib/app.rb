@@ -1,11 +1,25 @@
 require 'rubygems'
 require 'sinatra'
 
+require_relative 'dashboard_handler'
 
 set :port, 8080
 
-class WebPageDashBoard
+class WebPageDashBoard < Sinatra::Application
+
+  def initialize
+    @handler = DashboardHandler.new
+  end
+
   attr_accessor :param
+
+  get '/' do
+    @handler.show_message
+  end
+
+  get '/ping' do
+    @handler.ping
+  end
 
   def initialize
 

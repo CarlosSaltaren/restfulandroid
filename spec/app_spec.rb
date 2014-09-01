@@ -5,6 +5,8 @@ require_relative '../lib/app'
 #set :environment, :test
 
 describe 'WebPageDashBoard' do
+  include Rack::Test::Methods
+
   subject { WebPageDashBoard.new }
 
   context 'when file exists' do
@@ -24,10 +26,13 @@ describe 'WebPageDashBoard' do
   end
 
   #include Rack::Test::Methods
+  def app
+    WebPageDashBoard
+  end
 
   it 'return false if file does not exist' do
-    filename = '../config.ru'
-    expect(subject.getFile(filename)).to be true
+    # filename = '../config.ru'
+    # expect(subject.getFile(filename)).to be true
     # @newObj.getFile filename.should eql 'This is true'
     #@newObj.getFile filename.should eql true
 

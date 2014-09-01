@@ -1,4 +1,4 @@
 
-require '../lib/app'
-run Sinatra::Application
+require_relative 'lib/app'
+run WebPageDashBoard
 
