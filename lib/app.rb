@@ -11,6 +11,11 @@ def reverse string
 
 end
 
+def getFile fileName
+  File.exist?('/settings/config.ru')
+end
+
+
 
 get '/' do
   return 'Cams message'
