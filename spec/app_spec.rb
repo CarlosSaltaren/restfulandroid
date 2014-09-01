@@ -28,6 +28,13 @@ describe 'isFileValid' do
       file = 'path'
       File.file?(filenme).should eql'true'
     end
+end
+
+    describe 'informationInFileCorrect' do
+      it 'return false if file does not exist' do
+        file = 'path'
+        File.file?(filenme).should eql'true'
+      end
 
 
 end
