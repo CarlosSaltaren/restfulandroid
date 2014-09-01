@@ -31,15 +31,9 @@ describe 'WebPageDashBoard' do
   end
 
   it 'return false if file does not exist' do
-    # filename = '../config.ru'
-    # expect(subject.getFile(filename)).to be true
-    # @newObj.getFile filename.should eql 'This is true'
-    #@newObj.getFile filename.should eql true
+    filename = '../config.ru'
+    expect(subject.getFile(filename)).to be true
 
-    #File.exist?('../config.ru').should eql true
-    #expect(@newObj.getFile filename.should eql true
-
-    #@newObj.getFile filename.should eql 'This is true'
   end
 end
 
