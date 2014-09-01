@@ -31,16 +31,9 @@ describe 'WebPageDashBoard' do
   end
 
   it 'return false if file does not exist' do
-    filename = '../config.ru'
-    expect(subject.getFile(filename)).to be true
+  #  filename = '../config.ru'
+   # expect(subject.getFile(filename)).to be true
 
   end
 end
-
-#def app
-
- #  Sinatra::Application
-
-
-#end
 
