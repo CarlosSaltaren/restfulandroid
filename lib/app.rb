@@ -1,5 +1,5 @@
 require 'rubygems'
-require 'Sinatra'
+require 'sinatra'
 
 
 set :port, 8080
