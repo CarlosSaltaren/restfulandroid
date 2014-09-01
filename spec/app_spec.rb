@@ -21,6 +21,7 @@ describe 'Reverse1 Service' do
       end
 end
 
+<<<<<<< HEAD
 
 
 
@@ -28,13 +29,14 @@ end
 
 # File does not exist , we have to show something
 #
+=======
+describe 'isFileValid' do
+    it 'return false if file does not exist' do
+      file = 'path'
+      File.file?(filenme).should eql'true'
+    end
+>>>>>>> 6d80c79170f4fc923a789243c6510fd9912d1b16
 
-#require 'rspec'
 
-#describe 'My behaviour' do
+end
 
- # it 'should do something' do
-
-  #  true.should == false
-  #end
-#end
