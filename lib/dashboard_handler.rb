@@ -4,10 +4,11 @@ class DashboardHandler
   end
 
 
-  def isFileExist
+  def isFileExist (fileName)
 
-    return true;
-
+    p fileName
+    return File.file? (fileName)
+#return true
 
   end
 
