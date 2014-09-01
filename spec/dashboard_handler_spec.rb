@@ -12,4 +12,12 @@ describe DashboardHandler do
     end
   end
 
+
+  context 'If the file in the system' do
+    it 'returns true or false' do
+      expect(subject.isFileExist).to eq true
+    end
+  end
+
+
 end
