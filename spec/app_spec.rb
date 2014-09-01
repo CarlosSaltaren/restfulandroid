@@ -1,41 +1,47 @@
 require 'rack/test'
-require '../lib/app.rb'
 
+require_relative '../lib/app'
 
-set :environment, :test
+#set :environment, :test
 
+describe 'WebPageDashBoard' do
+  subject { WebPageDashBoard.new }
 
-def app
-
-   Sinatra::Application
-
-
-end
-
-describe 'Reverse1 Service' do
-    include Rack::Test::Methods
-      it 'should load the home page' do
-          get '/'
-          #expect (response).to  be_success
-          expect(last_response).to be_ok
-      end
-end
-
-
-
-describe 'isFileValid' do
-    it 'return false if file does not exist' do
-      file = 'path'
-      File.file?(filenme).should eql'true'
+  context 'when file exists' do
+    before :each do
+      # create_file
     end
+
+    it 'should read the content of the file' do
+
+    end
+  end
+
+  context 'file does not exist' do
+    before :each do
+      # ensure_file_does_not_exist
+    end
+  end
+
+  #include Rack::Test::Methods
+
+  it 'return false if file does not exist' do
+    filename = '../config.ru'
+    expect(subject.getFile(filename)).to be true
+    # @newObj.getFile filename.should eql 'This is true'
+    #@newObj.getFile filename.should eql true
+
+    #File.exist?('../config.ru').should eql true
+    #expect(@newObj.getFile filename.should eql true
+
+    #@newObj.getFile filename.should eql 'This is true'
+  end
 end
 
-    describe 'informationInFileCorrect' do
-      it 'return false if file does not exist' do
-        file = 'path'
-        File.file?(filenme).should eql'true'
-      end
+#def app
+
+ #  Sinatra::Application
 
 
-end
+#end
 
