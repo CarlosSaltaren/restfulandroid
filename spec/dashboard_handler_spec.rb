@@ -16,7 +16,7 @@ describe DashboardHandler do
   context 'If the file in the system' do
     it 'returns true or false' do
       fileName='lib/dashboard_handler.rb'
-      expect(subject.isFileExist fileName ).to eq true
+      expect(subject.isFileExist fileName ).to eq false
     end
   end
 
