@@ -14,26 +14,50 @@ describe 'WebPageDashBoard' do
       # create_file
     end
 
-    it 'should read the content of the file' do
+    it 'should read the content of the file  ' do
 
     end
   end
 
-  context 'file does not exist' do
+
+
+  context 'web page shows greetings' do
     before :each do
-      # ensure_file_does_not_exist
+    end
+
+    it 'should read the content of the web page' do
+      get '../views/index.erb'
+      #expect(last_response).to be_ok
+      #assert last_response.body.include?('H')
     end
   end
+
+
+
 
   #include Rack::Test::Methods
   def app
     WebPageDashBoard
   end
 
-  it 'return false if file does not exist' do
-  #  filename = '../config.ru'
-   # expect(subject.getFile(filename)).to be true
 
+
+
+
+  it 'should load the home page' do
+      get '/'
+      expect(last_response).to be_truthy
   end
+  it 'should show Hello to ToughtWorks' do
+    get 'views/index.erb'
+    p last_response.body
+    expect(last_response.body.include?('454544')).to be_truthy
+  end
+
+
+
+
+
+
 end
 
