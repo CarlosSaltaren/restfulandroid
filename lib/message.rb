@@ -9,4 +9,7 @@ attr_accessor :author, :messageId, :heading, :message, :postdate
   end
 
 
+
+
+
 end
