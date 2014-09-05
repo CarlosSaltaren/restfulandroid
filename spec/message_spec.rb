@@ -8,13 +8,17 @@ describe MessagePost do
   end
 
 
-  describe '#new' do
+  describe 'Test Message Instances' do
     it 'should return an object of message' do
       expect(@messageObj).to be_a MessagePost
     end
-#    it 'should throw an expection error' do
- #    expect(lambda {MessagePost.new 'author','mid','heading'}).
-  #   expect(subject.isFileExist fileName ).to eq true
-   #end
+   it 'should throw an expection error when given fewer variables' do
+     expect(lambda {MessagePost.new 'author','mid','heading'}).to_not be_an_instance_of MessagePost
+   end
+
+    it 'should throw an expection error when given more variables' do
+      expect(lambda {MessagePost.new 'author','mid','heading','xx','xx','xx'}).to_not be_an_instance_of MessagePost
+    end
+
   end
 end
