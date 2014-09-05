@@ -1,24 +1,24 @@
 require 'rubygems'
 require 'sinatra'
 
-require_relative 'dashboard_handler'
+#require_relative 'dashboard_handler'
 
 set :port, 8080
 
 class WebPageDashBoard < Sinatra::Application
 
   def initialize
-    @handler = DashboardHandler.new
+    #@handler = DashboardHandler.new
   end
 
   attr_accessor :param
 
   get '/' do
-    @handler.show_message
+    #@handler.show_message
   end
 
   get '/ping' do
-    @handler.ping
+    #@handler.ping
   end
 
   def reverse (string)
