@@ -18,4 +18,5 @@ describe MessagePost do
  #     expect(subject.isFileExist fileName ).to eq true
  #   end
   end
+
 end
