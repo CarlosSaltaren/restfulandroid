@@ -12,4 +12,22 @@ class DashboardHandler
 
   end
 
+
+  def hasFileCorrectExt (fileName)
+
+    isCorrectExt=false
+
+    extName=File.extname(fileName)
+
+    if(extName=='.rb')
+      isCorrectExt=true
+    end
+
+    return isCorrectExt
+
+
+  end
+
+
+
 end
