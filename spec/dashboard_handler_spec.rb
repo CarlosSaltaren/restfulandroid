@@ -21,6 +21,18 @@ describe DashboardHandler do
   end
 
 
+  context 'If the file has the correct ext' do
+
+     it 'return true or false' do
+
+       fileName = 'lib/dashboard_handler.rb'
+       expect(subject.hasFileCorrectExt fileName ).to eq true
+
+
+    end
+
+  end
+
 
 
 end
