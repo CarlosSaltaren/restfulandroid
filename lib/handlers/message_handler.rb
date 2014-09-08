@@ -1,31 +1,27 @@
 class Message
 
+  def initialize author,message,date
+    @msgRespository = MessageRepository.new
 
-  @msgRespository = MessageRepository.new
-
-  def initialize
+    @msgRespository.author = author
+    @msgRespository.message =message
+    @msgRespository.date =date
 
   end
 
-  def setMessage1 message
-    @msgRespository.setMessage message
-  end
+  def getMessage
+    return @msgRespository.message
 
-  def getMessage1
-   # return 'Hi'
-    @msgRespository.getMessage
   end
-
 
   def getAuthor
-
+   return @msgRespository.author
   end
 
 
-
-
-
-
+  def getDate
+    return @msgRespository.date
+  end
 
 end
 
