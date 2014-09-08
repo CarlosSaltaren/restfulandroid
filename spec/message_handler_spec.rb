@@ -8,13 +8,13 @@ require_relative '../lib/services/message_repositories'
 
 describe 'Message Repository' do
 
+  before :all do
+    subject { Message.new('Thoughtworks','Hi Team','20/12/2014')}
+  end
 
-  msgObj = MessageRepository.new
-  subject { Message.new(msgObj)}
   context 'setMessage and return the message' do
-    it 'set the message' do
-     msg = 'Hi'
-     subject.setMessage1(msg)
+    it 'should return the message' do
+      expect(subject.getMessage).to eq'Hi Team'
    end
 
     it 'get the message' do
