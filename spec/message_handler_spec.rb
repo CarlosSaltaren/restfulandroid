@@ -3,21 +3,25 @@ require 'rspec'
 
 require_relative '../lib/handlers/message_handler'
 
+require_relative '../lib/services/message_repositories'
+
+
 describe 'Message Repository' do
 
-  #subject { Message.new }
 
-  @msgObj = Message.new
+  msgObj = MessageRepository.new
+  subject { Message.new(msgObj)}
   context 'setMessage and return the message' do
     it 'set the message' do
+     msg = 'Hi'
+     subject.setMessage1(msg)
+   end
 
-    end
-      msg = 'Hi'
-      @msgObj.setMessage(ms)
 
-    end
 
     it 'get the message' do
-      expect(@msgObj.getMessage).to eq 'Hi'
+      expect(subject.getMessage1).to eq 'Hi'
     end
+
+  end
 end
