@@ -1,16 +1,26 @@
 class Message
 
-  def initialize rptObj
-    @msgRespository = rptObj
+  def initialize author,message,date
+    @msgRespository = MessageRepository.new
+
+    @msgRespository.author = author
+    @msgRespository.message =message
+    @msgRespository.date =date
+
   end
 
-  def setMessage1 message
-    @msgRespository.setMessage message
+  def setMessage
+    return @msgRespository.message
+
   end
 
-  def getMessage1
-   # return 'Hi'
-    @msgRespository.getMessage
+  def getAuthor
+   return @msgRespository.author
+  end
+
+
+  def getDate
+    return @msgRespository.date
   end
 
 end

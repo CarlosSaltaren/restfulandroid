@@ -17,11 +17,8 @@ describe 'Message Repository' do
      subject.setMessage1(msg)
    end
 
-
-
     it 'get the message' do
       expect(subject.getMessage1).to eq 'Hi'
     end
-
   end
 end
