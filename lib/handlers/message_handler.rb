@@ -9,7 +9,7 @@ class Message
 
   end
 
-  def setMessage
+  def getMessage
     return @msgRespository.message
 
   end
