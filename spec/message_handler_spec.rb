@@ -1,24 +1,25 @@
-
 require 'rspec'
-
+require 'rspec/matchers'
 require_relative '../lib/handlers/message_handler'
-
 require_relative '../lib/services/message_repositories'
 
+describe MessageHandler do
 
-describe 'Message Repository' do
+  subject { MessageHandler.new }
 
-  before :all do
-    subject { Message.new('Thoughtworks','Hi Team','20/12/2014')}
-  end
+  describe 'get_message' do
+    it 'gets the message from the repo' do
+      MessageRepository.message = 'whatever'
 
-  context 'setMessage and return the message' do
-    it 'should return the message' do
-      expect(subject.getMessage).to eq'Hi Team'
-   end
+      expect(subject.get_message).to eq 'whatever'
+      end
 
-    it 'get the message' do
-      expect(subject.getMessage1).to eq 'Hi'
+    it 'gets the message from the repo' do
+      MessageRepository.message = 'second test'
+
+      expect(subject.get_message).to eq 'second test'
     end
+
   end
+
 end

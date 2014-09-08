@@ -1,8 +1,12 @@
 class MessageRepository
-  attr_accessor :author, :message, :date
-  @message
-  def initialize
+  @@message = 'afghbaeflghaeigapi'
 
+  def self.message=(msg)
+    @@message = msg
+  end
+
+  def self.message
+    @@message
   end
 
 end
