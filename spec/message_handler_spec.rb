@@ -8,17 +8,31 @@ describe MessageHandler do
   subject { MessageHandler.new }
 
   describe 'get_message' do
-    it 'gets the message from the repo' do
-      MessageRepository.message = 'whatever'
+    context 'a message exists' do
+      it 'gets the message from the repo' do
+        MessageRepository.message = 'whatever'
 
-      expect(subject.get_message).to eq 'whatever'
+        expect(subject.get_message).to eq 'whatever'
       end
 
-    it 'gets the message from the repo' do
-      MessageRepository.message = 'second test'
+      it 'gets the message from the repo' do
+        MessageRepository.message = 'second test'
 
-      expect(subject.get_message).to eq 'second test'
+        expect(subject.get_message).to eq 'second test'
+      end
     end
+
+    context 'no message exists' do
+      it 'if message is nil' do
+        expect(MessageRepository.message).to eq 'Nil'
+      end
+
+      it 'if message is empty' do
+        expect(MessageRepository.message).to eq ''
+      end
+
+    end
+
 
   end
 
