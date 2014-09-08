@@ -1,7 +1,7 @@
 require 'rspec'
 require 'rspec/matchers'
 
-require_relative '../lib/services/message_repositories'
+require_relative '../lib/services/message_repository'
 
 describe MessageRepository do
 
