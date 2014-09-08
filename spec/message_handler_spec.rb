@@ -1,16 +1,12 @@
-
 require 'rspec'
-
 require_relative '../lib/handlers/message_handler'
-
-require_relative '../lib/services/message_repositories'
 
 
 describe 'Message Repository' do
 
 
-  msgObj = MessageRepository.new
-  subject { Message.new(msgObj)}
+  subject {  MessageRepository.new}
+
   context 'setMessage and return the message' do
     it 'set the message' do
      msg = 'Hi'
@@ -18,10 +14,16 @@ describe 'Message Repository' do
    end
 
 
-
+=begin
     it 'get the message' do
       expect(subject.getMessage1).to eq 'Hi'
     end
 
+    it 'msg has author' do
+
+      expect(subject.getAuthor).to eq 'csal'
+
+    end
+=end
   end
 end

@@ -1,6 +1,7 @@
 class MessageRepository
 
   @message
+
   def initialize
 
   end
@@ -12,6 +13,7 @@ class MessageRepository
   def getMessage
     return @message
   end
+
 
 
 end

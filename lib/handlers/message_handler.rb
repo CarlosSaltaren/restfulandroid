@@ -1,7 +1,10 @@
 class Message
 
-  def initialize rptObj
-    @msgRespository = rptObj
+
+  @msgRespository = MessageRepository.new
+
+  def initialize
+
   end
 
   def setMessage1 message
@@ -12,6 +15,17 @@ class Message
    # return 'Hi'
     @msgRespository.getMessage
   end
+
+
+  def getAuthor
+
+  end
+
+
+
+
+
+
 
 end
 
