@@ -1,28 +1,9 @@
-class Message
+require_relative '../../lib/services/message_repositories'
+class MessageHandler
 
-  def initialize author,message,date
-    @msgRespository = MessageRepository.new
-
-    @msgRespository.author = author
-    @msgRespository.message =message
-    @msgRespository.date =date
-
+  def get_message
+    MessageRepository.message
   end
-
-  def getMessage
-    return @msgRespository.message
-
-  end
-
-  def getAuthor
-   return @msgRespository.author
-  end
-
-
-  def getDate
-    return @msgRespository.date
-  end
-
 end
 
 

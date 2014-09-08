@@ -1,22 +1,14 @@
 require 'rspec'
+require 'rspec/matchers'
 
 require_relative '../lib/services/message_repositories'
 
-describe 'Message Repository' do
+describe MessageRepository do
 
-  subject { MessageRepository.new }
-
-
-  context 'setMessage and return the message' do
-    it 'set the message' do
-      msg = 'Hi'
-      subject.setMessage(msg)
-    end
-
-    it 'get the message' do
-      msg = 'Hi'
-      subject.setMessage(msg)
-      expect(subject.getMessage).to eq 'Hi'
+  describe 'message' do
+    it 'stores and retrieves a message' do
+      MessageRepository.message = 'some message'
+      expect(MessageRepository.message).to eq 'some messge'
     end
   end
 end

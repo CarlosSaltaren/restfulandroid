@@ -1,19 +1,12 @@
 class MessageRepository
+  @@message = 'afghbaeflghaeigapi'
 
-  @message
-
-  def initialize
-
+  def self.message=(msg)
+    @@message = msg
   end
 
-  def setMessage(message)
-    @message = message
+  def self.message
+    @@message
   end
-
-  def getMessage
-    return @message
-  end
-
-
 
 end
