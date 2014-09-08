@@ -1,8 +1,19 @@
+class Message
 
+  def initialize
+    @msgRespository = MessageRepository.new
+  end
 
-def reverse (string)
-  string.each_char.to_a.reverse.join
+  def setMessage message
+    @msgRespository.setMessage message
+  end
+
+  def getMessage
+    @msgRespository.getMessage
+  end
+
 end
+
 
 
 
