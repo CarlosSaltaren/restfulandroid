@@ -27,7 +27,7 @@ describe MessageHandler do
     context 'no message exists' do
       it 'if message is nil' do
         MessageRepository.message = nil
-        expect(MessageRepository.message).to eq nil
+        expect(subject.get_message).to eq 'Have a nice day'
       end
 
       it 'if message is empty' do
