@@ -19,15 +19,16 @@ describe MessageHandler do
 
       it 'gets the message from the repo' do
         MessageRepository.message = 'second test'
-
         expect(subject.get_message).to eq 'second test'
       end
     end
 
-    context 'no message exists' do
+
+    context 'no message exist' do
       it 'if message is nil' do
         MessageRepository.message = nil
-        expect(MessageRepository.message).to eq nil
+
+        expect(subject.get_message).to eq 'Have a nice day'
       end
 
       it 'if message is empty' do
@@ -36,6 +37,7 @@ describe MessageHandler do
       end
 
     end
+
 
 
   end
