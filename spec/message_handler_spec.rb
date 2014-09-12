@@ -27,6 +27,7 @@ describe MessageHandler do
     context 'no message exists' do
       it 'if message is nil' do
         MessageRepository.message = nil
+
         expect(subject.get_message).to eq 'Have a nice day'
       end
 
