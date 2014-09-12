@@ -1,5 +1,5 @@
 class MessageRepository
-  @@message = Ni
+  @@message = ''
 
   def self.message=(msg)
     @@message = msg

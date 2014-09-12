@@ -1,11 +1,13 @@
 require 'rspec'
 require 'rspec/matchers'
 require_relative '../lib/handlers/message_handler'
-require_relative '../lib/services/message_repository'
+require_relative '../lib/services/message__repository'
 
 describe MessageHandler do
 
+
   subject { MessageHandler.new }
+
 
   describe 'get_message' do
     context 'a message exists' do
@@ -24,11 +26,13 @@ describe MessageHandler do
 
     context 'no message exists' do
       it 'if message is nil' do
-        expect(MessageRepository.message).to eq 'Nil'
+        MessageRepository.message = nil
+        expect(MessageRepository.message).to eq nil
       end
 
       it 'if message is empty' do
-        expect(MessageRepository.message).to eq ''
+        MessageRepository.message=''
+        expect(subject.get_message).to eq 'Have a nice day'
       end
 
     end
