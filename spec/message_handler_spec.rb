@@ -47,7 +47,7 @@ end
     context 'no any message stored' do
       it 'returns the new message stored' do
 
-        MessageRepository.message = 'Message stored good morning'
+        subject.store_message  'Message stored good morning'
         expect(subject.get_message).to eq 'Message stored good morning'
 
       end
@@ -56,14 +56,16 @@ end
     context 'There is a new message to be stored' do
       it 'returns the last message stored' do
 
-        MessageRepository.message = nil
+        subject.store_message  'Message stored good morning'
+        subject.store_message  'New Message overwrite'
 
-        expect(subject.get_message).to eq ''
+        expect(subject.get_message).to eq 'New Message overwrite'
+
       end
     end
 
     context 'There is a empty message' do
-      it 'returns the previous message' do
+      it 'returns the previous message stored' do
 
         MessageRepository.message = 'Hello new world'
 
