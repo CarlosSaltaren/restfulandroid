@@ -6,6 +6,16 @@ class MessageHandler
   end
 
 
+  def store_message message
+
+
+    if  message!=''
+      MessageRepository.message = message
+    end
+
+  end
+
+
 
 
 end
