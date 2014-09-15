@@ -19,4 +19,9 @@ class WebPageDashBoard < Sinatra::Application
     @message_handler.store_message(request.body.read)
   end
 
+  delete '/message' do
+    @message_handler.delete_message
+  end
+
+
 end

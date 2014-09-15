@@ -18,6 +18,13 @@ class MessageHandler
 
   end
 
+  def delete_message
+
+    MessageRepository.message = ''
+
+  end
+
+
 end
 
 

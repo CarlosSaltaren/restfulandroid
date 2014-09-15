@@ -48,7 +48,25 @@ describe 'WebPageDashBoard' do
           expect(last_response.body).to eq('hello')
         end
       end
+
     end
+    describe 'DELETE' do
+      context 'there is a message to be deleted' do
+        let(:existing_message) { "G'day" }
+
+        before do
+          put '/message', existing_message
+        end
+
+        it 'should delete a message' do
+          delete '/message'
+          get '/dashboard'
+          expect(last_response.body).to eq('Have a nice day')
+        end
+      end
+
+    end
+
   end
 end
 
