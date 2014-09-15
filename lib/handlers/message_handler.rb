@@ -1,6 +1,6 @@
 require_relative '../../lib/services/message__repository'
 class MessageHandler
-
+#Good test
   def get_message
     if MessageRepository.message.nil? || MessageRepository.message.empty?
       'Have a nice day'
