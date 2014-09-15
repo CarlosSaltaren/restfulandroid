@@ -64,18 +64,27 @@ end
       end
     end
 
-    context 'There is a empty message' do
+    context 'Whe you post an empty message' do
       it 'returns the previous message stored' do
 
-        MessageRepository.message = 'Hello new world'
+        subject.store_message 'Hello new world'
 
-        MessageRepository.message = ''
+        subject.store_message ''
 
         expect(subject.get_message).to eq 'Hello new world'
       end
     end
 
+    context 'Whe you post an nil message' do
+      it 'returns the previous message stored' do
 
+        subject.store_message 'Hello am the previous message'
+
+        subject.store_message  nil
+
+        expect(subject.get_message).to eq 'Hello am the previous message'
+      end
+    end
   end
 
 end
