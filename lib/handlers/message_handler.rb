@@ -6,17 +6,14 @@ class MessageHandler
   end
 
 
-  def store_message message
+  def store_message msg
+    #if !msg.empty?
+    if !msg.nil? && !msg.empty?
+      MessageRepository.message = msg
 
-
-    if  message!=''
-      MessageRepository.message = message
     end
 
   end
-
-
-
 
 end
 
