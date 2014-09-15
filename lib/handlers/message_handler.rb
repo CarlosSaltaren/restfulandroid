@@ -9,8 +9,15 @@ class MessageHandler
   def store_message message
 
 
-    if  message!=''
+    if  message !=  ''
+
       MessageRepository.message = message
+
+    else
+
+      MessageRepository.message
+
+
     end
 
   end
