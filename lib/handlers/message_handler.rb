@@ -14,15 +14,6 @@ class MessageHandler
     if !msg.nil? && !msg.empty?
       MessageRepository.message = msg
 
-    if  message !=  ''
-
-      MessageRepository.message = message
-
-    else
-
-      MessageRepository.message
-
-end
     end
 
   end
