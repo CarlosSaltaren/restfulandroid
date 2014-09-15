@@ -19,23 +19,58 @@ describe MessageHandler do
 
       it 'gets the message from the repo' do
         MessageRepository.message = 'second test'
-
         expect(subject.get_message).to eq 'second test'
       end
     end
 
-    context 'no message exists' do
-      it 'if message is nil' do
+
+    context 'no message exist' do
+      it 'returns a default message when the message is nil' do
         MessageRepository.message = nil
 
         expect(subject.get_message).to eq 'Have a nice day'
       end
 
-      it 'if message is empty' do
-        MessageRepository.message=''
-        expect(subject.get_message).to eq 'Have a nice day'
+      it 'returns a default message when the message is empty' do
+        MessageRepository.message = ''
+        expect(subject.get_message).to eq ''
       end
 
+    end
+
+
+end
+
+
+
+  describe 'set_message' do
+    context 'no any message stored' do
+      it 'returns the new message stored' do
+
+        MessageRepository.message = 'Message stored good morning'
+        expect(subject.get_message).to eq 'Message stored good morning'
+
+      end
+    end
+
+    context 'There is a new message to be stored' do
+      it 'returns the last message stored' do
+
+        MessageRepository.message = nil
+
+        expect(subject.get_message).to eq ''
+      end
+    end
+
+    context 'There is a empty message' do
+      it 'returns the previous message' do
+
+        MessageRepository.message = 'Hello new world'
+
+        MessageRepository.message = ''
+
+        expect(subject.get_message).to eq 'Hello new world'
+      end
     end
 
 
