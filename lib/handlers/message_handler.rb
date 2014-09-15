@@ -11,7 +11,7 @@ class MessageHandler
     #MessageRepository.message.empty ? 'Have a nice day' : MessageRepository.message
   end
 
-
+ 
   def store_message msg
     #if !msg.empty?
     if !msg.nil? && !msg.empty?
