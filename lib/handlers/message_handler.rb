@@ -2,7 +2,13 @@ require_relative '../../lib/services/message__repository'
 class MessageHandler
 
   def get_message
-    MessageRepository.message.nil? ? 'Have a nice day' : MessageRepository.message
+    if MessageRepository.message.nil? || MessageRepository.message.empty?
+
+      'Have a nice day'
+    else
+      MessageRepository.message
+    end
+    #MessageRepository.message.empty ? 'Have a nice day' : MessageRepository.message
   end
 
 

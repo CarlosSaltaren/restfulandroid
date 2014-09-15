@@ -1,23 +1,53 @@
+ENV['RACK_ENV'] = 'test'
+
 require 'rspec'
 require 'rspec/matchers'
-require_relative '../lib/handlers/message_handler'
-require_relative '../lib/services/message__repository'
+require_relative '../lib/app'
 require 'rack/test'
-#set :environment, :test
-
 
 describe 'WebPageDashBoard' do
   include Rack::Test::Methods
 
-  #subject { WebPageDashBoard.new }
+  def app
+    WebPageDashBoard
+  end
 
-  context 'when file exists' do
-    #before :each do
-    # create_file
-    #end
+  describe 'URI: /dashboard' do
+    describe 'GET' do
+      it 'should return a 200 OK' do
+        get '/dashboard'
+        expect(last_response.status).to eq(200)
+      end
+    end
+  end
 
-    it 'should read the content of the file  ' do
+  describe 'URI: /message' do
+    describe 'PUT' do
+      it 'should return a 200 OK' do
+        put '/message'
+        expect(last_response.status).to eq(200)
+      end
 
+      it 'should update the message' do
+        message = 'hello world'
+        put '/message', message
+        get '/dashboard'
+        expect(last_response.body).to eq(message)
+      end
+
+      context 'there is a message stored' do
+        let(:existing_message) { "G'day" }
+
+        before do
+          put '/message', existing_message
+        end
+
+        it 'should overwrite previous message' do
+          put '/message', 'hello'
+          get '/dashboard'
+          expect(last_response.body).to eq('hello')
+        end
+      end
     end
   end
 end

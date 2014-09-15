@@ -15,4 +15,8 @@ class WebPageDashBoard < Sinatra::Application
     @message_handler.get_message
   end
 
+  put '/message' do
+    @message_handler.store_message(request.body.read)
+  end
+
 end
