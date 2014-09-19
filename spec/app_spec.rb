@@ -100,7 +100,13 @@ describe 'WebPageDashBoard' do
       it 'should store the message' do
         msg = 'Hi there'
         date = Date.today
-        put '/message', msg,date
+        #@attr = { :title => "new title", :content => "new content" }
+        #put :update, :id => @article.id, :article => @attr
+
+        put :'/message', :msg => 'Hi there', :date => Date.today
+
+
+        #put '/message', msg,date
         expect(last_response.status).to eq(200)
       end
     end
