@@ -47,10 +47,50 @@ describe 'WebPageDashBoard' do
           get '/dashboard'
           expect(last_response.body).to eq('hello')
         end
+
+        it 'should not overwrite message if post message is empty' do
+          put '/message', ''
+          get '/dashboard'
+          expect(last_response.body).to eq existing_message
+        end
+
       end
+
     end
   end
+
+
+    describe 'DELETE' do
+      context 'there is a message to be deleted' do
+        let(:existing_message) { "G'day" }
+
+        before do
+          put '/message', existing_message
+        end
+
+        it 'should delete a message' do
+          delete '/message'
+          get '/dashboard'
+          expect(last_response.body).to eq('Have a nice day')
+        end
+      end
+
+      context 'there is a message any message to delete' do
+
+        it 'should return have a nice day' do
+          put '/message', nil
+          delete '/message'
+          get '/dashboard'
+          expect(last_response.body).to eq('Have a nice day')
+        end
+      end
+
+
+
+    end
+
 end
+
 
 
 
