@@ -70,24 +70,42 @@ describe 'WebPageDashBoard' do
 
         it 'should delete a message' do
           delete '/message'
+          expect(last_response.status).to eq(200)
+
           get '/dashboard'
           expect(last_response.body).to eq('Have a nice day')
         end
       end
 
-      context 'there is a message any message to delete' do
+      context 'there is not any message to delete' do
+        before do
+          # put '/message', nil
+          MessageRepository.message = nil
+        end
 
-        it 'should return have a nice day' do
-          put '/message', nil
+        it 'should return an http error' do
           delete '/message'
+          expect(last_response.status).to eq(404)
+
           get '/dashboard'
           expect(last_response.body).to eq('Have a nice day')
         end
       end
-
-
-
     end
+
+
+
+
+  describe 'Store Message With Expiry Date' do
+    context 'Store message with date' do
+      it 'should store the message' do
+        msg = 'Hi there'
+        date = Date.today
+        put '/message', msg,date
+        expect(last_response.status).to eq(200)
+      end
+    end
+  end
 
 end
 

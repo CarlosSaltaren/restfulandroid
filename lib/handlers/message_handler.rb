@@ -29,8 +29,21 @@ class MessageHandler
 
   def delete_message
 
-    MessageRepository.message = ''
-    @output
+    @status = false
+    #MessageRepository.message = ''
+    #@output
+p MessageRepository.message
+    if !MessageRepository.message.nil?
+
+      MessageRepository.message = ''
+      @status = true
+
+
+
+    end
+
+    @status
+
 
   end
 

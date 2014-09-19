@@ -20,7 +20,9 @@ class WebPageDashBoard < Sinatra::Application
   end
 
   delete '/message' do
-    @message_handler.delete_message
+    if !@message_handler.delete_message
+      status 404
+    end
   end
 
 
