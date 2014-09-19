@@ -8,6 +8,8 @@ class MessageRepository
 
   end
 
+
+
   def self.message
     @@message
   end

@@ -21,7 +21,7 @@ class MessageHandler
  
   def store_message msg, date
     if !msg.nil? && !msg.empty?
-      MessageRepository.message = msg
+      MessageRepository.message = msg,date
 
     end
 
