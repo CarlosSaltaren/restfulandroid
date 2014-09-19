@@ -1,4 +1,5 @@
 require_relative '../../lib/services/message__repository'
+require 'date'
 class MessageHandler
 
 
@@ -18,9 +19,16 @@ class MessageHandler
     end
   end
 
+  def get_date_message
+
+      MessageRepository.date
+
+  end
+
  
-  def store_message msg, date
+  def store_message ( msg, *date )
     if !msg.nil? && !msg.empty?
+      MessageRepository.date = Date.today
       MessageRepository.message = msg
 
     end
