@@ -1,6 +1,8 @@
 require 'rubygems'
 require 'sinatra'
+#require 'rails_helper'
 require_relative '../lib/handlers/message_handler'
+require 'json'
 
 class WebPageDashBoard < Sinatra::Application
 
@@ -16,7 +18,11 @@ class WebPageDashBoard < Sinatra::Application
   end
 
   put '/message' do
-    @message_handler.store_message(request.body.read)
+
+     JSON.parse(response.body)
+
+    p parsed_body['msg']
+    @message_handler.store_message(request.body.read['msg'], '')
   end
 
   delete '/message' do

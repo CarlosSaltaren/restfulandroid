@@ -19,7 +19,7 @@ class MessageHandler
   end
 
  
-  def store_message msg
+  def store_message msg, date
     if !msg.nil? && !msg.empty?
       MessageRepository.message = msg
 
@@ -30,9 +30,7 @@ class MessageHandler
   def delete_message
 
     @status = false
-    #MessageRepository.message = ''
-    #@output
-p MessageRepository.message
+
     if !MessageRepository.message.nil?
 
       MessageRepository.message = ''
