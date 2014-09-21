@@ -2,6 +2,7 @@ require 'rspec'
 require 'rspec/matchers'
 require_relative '../lib/handlers/message_handler'
 require_relative '../lib/services/message__repository'
+require 'active_support/time'
 
 describe MessageHandler do
 
@@ -113,9 +114,12 @@ end
 
 
   describe 'set_date_message' do
-    context 'message set with data' do
+    context 'message set with date' do
       it 'returns the date and the message' do
 
+
+        d = Date.today
+        p d + 5
 
         subject.store_message  'Hi there' ,Date.today
 

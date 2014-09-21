@@ -30,6 +30,8 @@ class WebPageDashBoard < Sinatra::Application
      # p parsed_body['msg']
       @message_handler.store_message(request.body.read)
 
+
+
   end
 
   delete '/message' do
