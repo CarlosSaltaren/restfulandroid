@@ -110,4 +110,23 @@ end
 
   end
 
+
+
+  describe 'set_date_message' do
+    context 'message set with data' do
+      it 'returns the date and the message' do
+
+
+        subject.store_message  'Hi there' ,Date.today
+
+        expect(subject.get_date_message).to eq Date.today
+
+      end
+    end
+
+
+  end
+
+
+
 end

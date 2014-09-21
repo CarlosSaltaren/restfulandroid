@@ -95,17 +95,25 @@ describe 'WebPageDashBoard' do
 
 
 
+=begin
   describe 'Store Message With Expiry Date' do
     context 'Store message with date' do
       it 'should store the message' do
         msg = 'Hi there'
         date = Date.today
+        #@attr = { :title => "new title", :content => "new content" }
+        #put :update, :id => @article.id, :article => @attr
+
         put :'/message', :msg => 'Hi there', :date => Date.today
 
+
+        #put '/message', msg,date
         expect(last_response.status).to eq(200)
       end
     end
   end
+=end
+
 
 end
 

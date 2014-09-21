@@ -2,12 +2,16 @@ class MessageRepository
   @@message = ''
   @@date = nil
 
-  def self.message=(msg, date)
+  def self.message=(msg)
     @@message = msg
-    @@date=date
 
   end
 
+
+  def self.date=(date)
+    @@date=date
+
+  end
 
 
   def self.message

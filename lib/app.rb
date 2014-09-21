@@ -3,6 +3,8 @@ require 'sinatra'
 #require 'rails_helper'
 require_relative '../lib/handlers/message_handler'
 require 'json'
+require 'uri'
+require 'cgi'
 
 class WebPageDashBoard < Sinatra::Application
 
@@ -17,12 +19,17 @@ class WebPageDashBoard < Sinatra::Application
     @message_handler.get_message
   end
 
+
   put '/message' do
 
-     JSON.parse(response.body)
 
-    p parsed_body['msg']
-    @message_handler.store_message(request.body.read['msg'], '')
+    #p request.body.read
+    #data=CGI.parse(URI.parse(request.body.read).query)
+    #p data[0]
+
+     # p parsed_body['msg']
+      @message_handler.store_message(request.body.read)
+
   end
 
   delete '/message' do
