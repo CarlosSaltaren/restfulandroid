@@ -2,6 +2,7 @@ require 'rspec'
 require 'rspec/matchers'
 require_relative '../lib/handlers/message_handler'
 require_relative '../lib/services/message__repository'
+require 'date'
 require 'active_support/time'
 
 describe MessageHandler do
@@ -114,16 +115,20 @@ end
 
 
   describe 'set_date_message' do
-    context 'message set with date' do
+    context 'message set with data' do
       it 'returns the date and the message' do
+        dt = Date.today + 5.days
+        date = dt.strftime("%Y-%m-%d")
+
+        subject.store_message  'Hi there' ,date
 
 
-        d = Date.today
-        p d + 5
+        currDate = Date.today
+        toDay = currDate.strftime("%Y-%m-%d")
+        expect(Date.parse(subject.get_date_message.to_s)).to be > Date.today
 
-        subject.store_message  'Hi there' ,Date.today
-
-        expect(subject.get_date_message).to eq Date.today
+        p date
+        p toDay
 
       end
     end

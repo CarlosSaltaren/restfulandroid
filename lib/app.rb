@@ -21,13 +21,6 @@ class WebPageDashBoard < Sinatra::Application
 
 
   put '/message' do
-
-
-    #p request.body.read
-    #data=CGI.parse(URI.parse(request.body.read).query)
-    #p data[0]
-
-     # p parsed_body['msg']
       @message_handler.store_message(request.body.read)
 
 

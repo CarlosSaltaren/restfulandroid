@@ -20,20 +20,18 @@ class MessageHandler
   end
 
   def get_date_message
-
       MessageRepository.date
-
   end
 
  
-  def store_message ( msg, *date )
+  def store_message ( msg,*date )
     if !msg.nil? && !msg.empty?
-      MessageRepository.date = Date.today
+      MessageRepository.date = date
       MessageRepository.message = msg
-
     end
-
   end
+
+
 
   def delete_message
 
