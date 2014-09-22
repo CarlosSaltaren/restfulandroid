@@ -26,6 +26,10 @@ class MessageHandler
  
   def store_message ( msg,*date )
     if !msg.nil? && !msg.empty?
+      if date.empty?
+        date = Date.today
+        date = ndate.strftime("%Y-%m-%d")
+      end
       MessageRepository.date = date
       MessageRepository.message = msg
     end

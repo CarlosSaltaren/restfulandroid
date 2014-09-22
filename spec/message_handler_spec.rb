@@ -115,20 +115,14 @@ end
 
 
   describe 'set_date_message' do
-    context 'message set with data' do
+    context 'message set with date' do
       it 'returns the date and the message' do
         dt = Date.today + 5.days
         date = dt.strftime("%Y-%m-%d")
-
         subject.store_message  'Hi there' ,date
-
-
         currDate = Date.today
         toDay = currDate.strftime("%Y-%m-%d")
         expect(Date.parse(subject.get_date_message.to_s)).to be > Date.today
-
-        p date
-        p toDay
 
       end
     end
