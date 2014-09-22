@@ -118,12 +118,9 @@ end
       it 'returns the date and the message' do
 
 
-        d = Date.today
-        p d + 5
-
         subject.store_message  'Hi there' ,Date.today
 
-        expect(subject.get_date_message).to eq Date.today
+        expect(Date.parse subject.get_date_message.to_s).to eq  Date.today
 
       end
     end
@@ -131,6 +128,27 @@ end
 
   end
 
+
+
+  describe 'get expire date' do
+    context 'dates message is expired' do
+      it 'returns default message' do
+
+
+        d = Date.today + 5.days
+
+        subject.store_message  'Hi message expired' ,d
+
+
+
+
+        expect(Date.parse subject.get_date_message.to_s).to be == Date.today
+
+      end
+    end
+
+
+  end
 
 
 end

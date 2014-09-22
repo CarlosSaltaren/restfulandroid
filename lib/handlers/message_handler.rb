@@ -28,8 +28,14 @@ class MessageHandler
  
   def store_message ( msg, *date )
     if !msg.nil? && !msg.empty?
-      MessageRepository.date = Date.today
+
       MessageRepository.message = msg
+      MessageRepository.date = Date.today
+
+    end
+
+    if !date.empty?
+      MessageRepository.date = date
 
     end
 
