@@ -2,6 +2,7 @@ require 'rspec'
 require 'rspec/matchers'
 require_relative '../lib/handlers/message_handler'
 require_relative '../lib/services/message__repository'
+require 'date'
 require 'active_support/time'
 
 describe MessageHandler do
@@ -115,40 +116,55 @@ end
 
   describe 'set_date_message' do
     context 'message set with date' do
-      it 'returns the date and the message' do
+      it 'returns the date of the message' do
 
 
         subject.store_message  'Hi there' ,Date.today
+        expect(Date.parse(subject.get_date_message.to_s)).to be == Date.today
 
-        expect(Date.parse subject.get_date_message.to_s).to eq  Date.today
 
       end
     end
 
 
-  end
+
+
+    context 'message set with data' do
+      it 'returns the date and the message' do
+
+        dt = Date.today + 5.days
+        date = dt.strftime("%Y-%m-%d")
+        subject.store_message  'Hi there' ,date
+
+        currDate = Date.today
+        toDay = currDate.strftime("%Y-%m-%d")
+        expect(Date.parse(subject.get_date_message.to_s)).to be > Date.today
+
+
+      end
+    end
 
 
 
-  describe 'get expire date' do
-    context 'dates message is expired' do
+
+
+
+    context 'message date is expired' do
       it 'returns default message' do
 
 
-        d = Date.today + 5.days
+        olddatemsg = Date.today - 5.days
 
-        subject.store_message  'Hi message expired' ,d
-
-
+        subject.store_message  'Hi message expired' ,olddatemsg
 
 
-        expect(Date.parse subject.get_date_message.to_s).to be == Date.today
+        expect(subject.get_message).to eq 'Have a nice day'
+
 
       end
     end
+end
 
-
-  end
 
 
 end

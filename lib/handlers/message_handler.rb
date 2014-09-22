@@ -1,5 +1,7 @@
 require_relative '../../lib/services/message__repository'
 require 'date'
+require 'active_support/time'
+
 class MessageHandler
 
 
@@ -11,35 +13,54 @@ class MessageHandler
 
 
   def get_message
+
+
+
     if MessageRepository.message.nil? || MessageRepository.message.empty?
+
       @output
       #'Have a nice day'
     else
-      MessageRepository.message
+
+      if !MessageRepository.date.nil?
+
+        if Date.parse(MessageRepository.date.to_s) < Date.today
+          @output
+        else
+          MessageRepository.message
+
+        end
+      else
+        MessageRepository.message
+      end
+
     end
   end
 
   def get_date_message
-
       MessageRepository.date
-
   end
 
  
-  def store_message ( msg, *date )
-    if !msg.nil? && !msg.empty?
+  def store_message ( msg,*date )
 
-      MessageRepository.message = msg
+    if !date.empty?
+
       MessageRepository.date = Date.today
 
     end
 
-    if !date.empty?
+    if !msg.nil? && !msg.empty?
+
+      MessageRepository.message = msg
       MessageRepository.date = date
 
     end
 
+
   end
+
+
 
   def delete_message
 
