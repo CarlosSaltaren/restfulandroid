@@ -88,41 +88,17 @@ describe 'WebPageDashBoard' do
 
       context 'there is not any message to delete' do
         before do
-          # put '/message', nil
           MessageRepository.message = nil
         end
 
         it 'should return an http error' do
           delete '/message'
           expect(last_response.status).to eq(404)
-
           get '/dashboard'
           expect(last_response.body).to eq('Have a nice day')
         end
       end
     end
-
-
-
-=begin
-  describe 'Store Message With Expiry Date' do
-    context 'Store message with date' do
-      it 'should store the message' do
-        msg = 'Hi there'
-        date = Date.today
-        #@attr = { :title => "new title", :content => "new content" }
-        #put :update, :id => @article.id, :article => @attr
-
-        put :'/message', :msg => 'Hi there', :date => Date.today
-
-
-        #put '/message', msg,date
-        expect(last_response.status).to eq(200)
-      end
-    end
-  end
-=end
-
 
 end
 

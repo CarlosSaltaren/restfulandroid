@@ -4,13 +4,11 @@ class MessageRepository
 
   def self.message=(msg)
     @@message = msg
-
   end
 
 
   def self.date=(date)
     @@date=date
-
   end
 
 
