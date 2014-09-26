@@ -39,6 +39,7 @@ class MessageHandler
     raise RuntimeError if date.nil?
 
     if !msg.nil? && !msg.empty?
+
       MessageRepository.message = msg
       MessageRepository.date = date
     end
