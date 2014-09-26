@@ -14,16 +14,23 @@ describe 'WebPageDashBoard' do
 
   describe 'URI: /dashboard' do
     describe 'GET' do
+
+
       it 'gets the message from the message handler' do
+      begin
         message_handler = double(:message_handler)
-        allow(MessageHandler).to receive(:new).and_return(message_handler)
+
+        allow(message_handler).to receive(:new).and_return(message_handler)
 
         expect(message_handler).to receive(:get_message).and_return('something')
         get '/dashboard'
         expect(last_response.body).to eq 'something'
+
       end
+    end
 
       it 'should return a 200 OK' do
+
         get '/dashboard'
         expect(last_response.status).to eq(200)
       end
