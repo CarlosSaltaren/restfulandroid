@@ -12,106 +12,102 @@ describe MessageHandler do
 
 
   describe 'get_message' do
-    context 'a message exists' do
-      it 'gets the message from the repo' do
+    context 'Message exist' do
+      before do
         MessageRepository.message = 'whatever'
-
-        expect(subject.get_message).to eq 'whatever'
       end
-
       it 'gets the message from the repo' do
-        MessageRepository.message = 'second test'
-        expect(subject.get_message).to eq 'second test'
+        expect(MessageRepository.message).to eq 'whatever'
       end
     end
 
-    context 'no message exist' do
-      it 'returns a default message when the message is nil' do
+    context 'Message is nil' do
+      before do
         MessageRepository.message = nil
-
+      end
+      it 'returns a default message when the message is nil' do
         expect(subject.get_message).to eq 'Have a nice day'
       end
+    end
 
-      it 'returns a default message when the message is empty' do
+    context 'Message is empty' do
+      before do
         MessageRepository.message = ''
+      end
+      it 'returns a default message when the message is empty' do
         expect(subject.get_message).to eq 'Have a nice day'
       end
     end
   end
 
   describe 'store_message' do
-    context 'no message is already stored' do
+    context 'No message is already stored' do
       before do
         MessageRepository.message = ''
       end
-
       it 'returns the new message stored' do
-        subject.store_message 'Message stored good morning'
+        subject.store_message 'Message stored good morning', Date.today
         expect(MessageRepository.message).to eq 'Message stored good morning'
-
+      end
+      it 'returns the new message stored with special characters' do
+        subject.store_message 'Message !@#$%^&*(*(', Date.today
+        expect(MessageRepository.message).to eq 'Message !@#$%^&*(*('
       end
     end
 
     context 'There is a new message to be stored' do
+      before do
+        subject.store_message  'Message stored good morning', Date.today
+      end
       it 'returns the last message stored' do
-
-        subject.store_message  'Message stored good morning'
-        subject.store_message  'New Message overwrite'
-
-        expect(subject.get_message).to eq 'New Message overwrite'
-
+        subject.store_message  'New Message overwrite', Date.today
+        expect(MessageRepository.message).to eq 'New Message overwrite'
+      end
+      it 'returns the previous message stored   when you post an empty message' do
+        subject.store_message '', Date.today
+        expect(MessageRepository.message).to eq 'Message stored good morning'
       end
     end
 
-    context 'Whe you post an empty message' do
+
+    context 'When you post an nil message' do
       it 'returns the previous message stored' do
-
-        subject.store_message 'Hello new world'
-
-        subject.store_message ''
-
-        expect(subject.get_message).to eq 'Hello new world'
-      end
-    end
-
-    context 'Whe you post an nil message' do
-      it 'returns the previous message stored' do
-
-        subject.store_message 'Hello am the previous message'
-
-        subject.store_message  nil
-
+        subject.store_message 'Hello am the previous message', Date.today
+        subject.store_message  nil, Date.today
         expect(subject.get_message).to eq 'Hello am the previous message'
       end
     end
 
+
     context 'message set with date' do
+      before do
+        @dateMessage = Date.today
+      end
       it 'returns the date of the message' do
-        subject.store_message  'Hi there' ,Date.today
+        subject.store_message  'Hi there' , @dateMessage
         expect(Date.parse(subject.get_date_message.to_s)).to be == Date.today
       end
-    end
-
-    context 'message set with data' do
       it 'returns the date and the message' do
-        dt = Date.today + 5.days
+        dt = @dateMessage + 5.days
         date = dt.strftime("%Y-%m-%d")
         subject.store_message  'Hi there' ,date
 
-        currDate = Date.today
+        currDate = @dateMessage
         toDay = currDate.strftime("%Y-%m-%d")
         expect(Date.parse(subject.get_date_message.to_s)).to be > Date.today
       end
-    end
-
-    context 'message date is expired' do
-      it 'returns default message' do
-        olddatemsg = Date.today - 5.days
+      it 'returns default message if message date is expired' do
+        olddatemsg = @dateMessage - 5.days
 
         subject.store_message  'Hi message expired' ,olddatemsg
 
         expect(subject.get_message).to eq 'Have a nice day'
       end
+
+    end
+
+    it 'throws error when date not given' do
+      expect { subject.store_message('whatever', nil) }.to raise_error
     end
   end
 
