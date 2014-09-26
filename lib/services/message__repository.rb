@@ -1,14 +1,14 @@
 class MessageRepository
   @@message = ''
-  @@date = nil
+  @@expiryDate = nil
 
   def self.message=(msg)
     @@message = msg
   end
 
 
-  def self.date=(date)
-    @@date=date
+  def self.expiryDate=(xpdate)
+    @@expiryDate=xpdate
   end
 
 
@@ -16,8 +16,8 @@ class MessageRepository
     @@message
   end
 
-  def self.date
-    @@date
+  def self.expiryDate
+    @@expiryDate
   end
 
 end
