@@ -16,19 +16,25 @@ class MessageHandler
 
 
 
+    if MessageRepository.message.nil? || MessageRepository.message.empty?
 
-
-      if MessageRepository.message.nil? || MessageRepository.message.empty?
-        @output
+      @output
       #'Have a nice day'
+    else
+
+      if !MessageRepository.date.nil? && !MessageRepository.date.empty?
+
+        if Date.parse(MessageRepository.date.to_s) < Date.today
+          @output
+        else
+          MessageRepository.message
+
+        end
       else
-
-        #if Date.parse(MessageRepository.date.to_s) < Date.today
-
-
         MessageRepository.message
       end
 
+    end
   end
 
   def get_date_message
@@ -37,7 +43,12 @@ class MessageHandler
 
  
   def store_message ( msg,*date )
-
+=begin
+      msgDate = Date.today
+      if date.nil? && date.empty?
+      date = Date.today
+      end
+=end
     if !msg.nil? && !msg.empty?
 
       MessageRepository.message = msg
