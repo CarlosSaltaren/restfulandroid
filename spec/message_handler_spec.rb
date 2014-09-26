@@ -46,25 +46,25 @@ describe MessageHandler do
         MessageRepository.message = ''
       end
       it 'returns the new message stored' do
-        subject.store_message 'Message stored good morning'
+        subject.store_message 'Message stored good morning', Date.today
         expect(MessageRepository.message).to eq 'Message stored good morning'
       end
       it 'returns the new message stored with special characters' do
-        subject.store_message 'Message !@#$%^&*(*('
+        subject.store_message 'Message !@#$%^&*(*(', Date.today
         expect(MessageRepository.message).to eq 'Message !@#$%^&*(*('
       end
     end
 
     context 'There is a new message to be stored' do
       before do
-        subject.store_message  'Message stored good morning'
+        subject.store_message  'Message stored good morning', Date.today
       end
       it 'returns the last message stored' do
-        subject.store_message  'New Message overwrite'
+        subject.store_message  'New Message overwrite', Date.today
         expect(MessageRepository.message).to eq 'New Message overwrite'
       end
       it 'returns the previous message stored   when you post an empty message' do
-        subject.store_message ''
+        subject.store_message '', Date.today
         expect(MessageRepository.message).to eq 'Message stored good morning'
       end
     end
@@ -72,8 +72,8 @@ describe MessageHandler do
 
     context 'When you post an nil message' do
       it 'returns the previous message stored' do
-        subject.store_message 'Hello am the previous message'
-        subject.store_message  nil
+        subject.store_message 'Hello am the previous message', Date.today
+        subject.store_message  nil, Date.today
         expect(subject.get_message).to eq 'Hello am the previous message'
       end
     end
@@ -106,7 +106,9 @@ describe MessageHandler do
 
     end
 
-
+    it 'throws error when date not given' do
+      expect { subject.store_message('whatever', nil) }.to raise_error
+    end
   end
 
   describe 'Delete message' do
