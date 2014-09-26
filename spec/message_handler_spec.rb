@@ -45,7 +45,7 @@ end
 
 
 
-  describe 'set_message' do
+  describe 'store_message' do
     context 'no any message stored' do
       it 'returns the new message stored' do
 
@@ -114,7 +114,7 @@ end
 
 
 
-  describe 'set_date_message' do
+  describe 'get_date_message' do
     context 'message set with date' do
       it 'returns the date of the message' do
 
