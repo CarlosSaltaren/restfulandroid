@@ -20,8 +20,12 @@ describe 'WebPageDashBoard' do
       begin
         message_handler = double(:message_handler)
 
+
         allow(message_handler).to receive(:new).and_return(message_handler)
 
+
+        allow(MessageHandler).to receive(:new).and_return(message_handler)
+        #very good
         expect(message_handler).to receive(:get_message).and_return('something')
         get '/dashboard'
         expect(last_response.body).to eq 'something'
