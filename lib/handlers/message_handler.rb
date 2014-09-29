@@ -35,7 +35,7 @@ class MessageHandler
   end
 
  
-  def store_message ( msg, date, expPeriod)
+  def store_message ( msg, date)
     raise RuntimeError if date.nil?
     if !msg.nil? && !msg.empty?
       MessageRepository.message = msg
