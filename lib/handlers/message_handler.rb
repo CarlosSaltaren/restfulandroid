@@ -39,15 +39,11 @@ class MessageHandler
 
  
   def store_message ( msg, date = Date.today + DEFAULT_PERIOD_EXPIRE )
-    p date
-    #@sta = false
     raise RuntimeError if date.nil?
     if !msg.nil? && !msg.empty?
       MessageRepository.message = msg
       MessageRepository.expiryDate = date
-     # @sta=true
     end
-   # @sta
   end
 
 
