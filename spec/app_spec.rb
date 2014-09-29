@@ -4,6 +4,7 @@ require 'rspec'
 require 'rspec/matchers'
 require_relative '../lib/app'
 require 'rack/test'
+#require 'active_support/core_ext'
 
 describe 'WebPageDashBoard' do
   include Rack::Test::Methods
@@ -12,10 +13,9 @@ describe 'WebPageDashBoard' do
     WebPageDashBoard
   end
 
+  # Test the get message endpoing using the mock object
   describe 'URI: /dashboard' do
     describe 'GET' do
-
-
       it 'gets the message from the message handler' do
       begin
         message_handler = double(:message_handler)
@@ -24,12 +24,10 @@ describe 'WebPageDashBoard' do
         expect(message_handler).to receive(:get_message).and_return('something')
         get '/dashboard'
         expect(last_response.body).to eq 'something'
-
       end
     end
 
       it 'should return a 200 OK' do
-
         get '/dashboard'
         expect(last_response.status).to eq(200)
       end
@@ -55,10 +53,14 @@ describe 'WebPageDashBoard' do
     end
   end
 
+
   describe 'URI: /message' do
     describe 'PUT' do
       it 'should return a 200 OK' do
-        put '/message'
+        message_handler = double(:message_handler)
+        allow(MessageHandler).to receive(:new).and_return(message_handler)
+        expect(message_handler).to receive(:store_message).with('Hi there',Date.parse('2014-09-29'))#.and_return(200)
+        put '/message', {message_text:'Hi there',expiry_date:'2014-09-29'}.to_json, {'content-type' => 'application/json'}
         expect(last_response.status).to eq(200)
       end
 
@@ -125,6 +127,9 @@ describe 'WebPageDashBoard' do
       end
     end
 
+  it 'example' do
+    expect(Date).to receive(:today).and_return(Date.new(2014,9,23))
+  end
 end
 
 
