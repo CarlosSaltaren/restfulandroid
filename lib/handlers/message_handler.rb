@@ -18,8 +18,8 @@ class MessageHandler
       @output
       #'Have a nice day'
     else
-      if !MessageRepository.date.nil? && !MessageRepository.date.nil?
-        if MessageRepository.date < Date.today
+      if !MessageRepository.expiryDate.nil? && !MessageRepository.expiryDate.nil?
+        if MessageRepository.expiryDate < Date.today
           @output
         else
           MessageRepository.message
@@ -31,7 +31,7 @@ class MessageHandler
   end
 
   def get_date_message
-      MessageRepository.date
+      MessageRepository.expiryDate
   end
 
  
@@ -41,7 +41,7 @@ class MessageHandler
     if !msg.nil? && !msg.empty?
 
       MessageRepository.message = msg
-      MessageRepository.date = date
+      MessageRepository.expiryDate = date
     end
   end
 
