@@ -34,7 +34,7 @@ describe 'WebPageDashBoard' do
     end
   end
 
-  # Test the put message endpoing using the mock object
+
   describe 'URI: /message' do
     describe 'PUT' do
       it 'should return a 200 OK' do
