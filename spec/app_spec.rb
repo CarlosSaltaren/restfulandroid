@@ -32,22 +32,6 @@ describe 'WebPageDashBoard' do
         expect(last_response.status).to eq(200)
       end
 
-      it 'Mock gets expired message from the message handler' do
-        begin
-          message_handler = double(:message_handler)
-          #allow(message_handler).to receive(:new).and_return(message_handler)
-          allow(MessageHandler).to receive(:new).and_return(message_handler)
-
-          expect(message_handler).to receive(:store_message).with('sds',Date.today)
-          #message_handler.store_message 'asdf' , Date.today
-          #expect(message_handler).to receive(:get_message).and_return('something')
-
-
-          get '/dashboard'
-          expect(last_response.body).to eq 'asdft'
-
-        end
-      end
 
 
     end
@@ -66,7 +50,7 @@ describe 'WebPageDashBoard' do
 
       it 'should update the message' do
         message = 'hello world'
-        put '/message', message
+        put '/message', {message_text:message}.to_json, {'content-type' => 'application/json'}
         get '/dashboard'
         expect(last_response.body).to eq(message)
       end
@@ -75,17 +59,19 @@ describe 'WebPageDashBoard' do
         let(:existing_message) { "G'day" }
 
         before do
-          put '/message', existing_message
+          put '/message', {message_text:existing_message}.to_json, {'content-type' => 'application/json'}
         end
 
         it 'should overwrite previous message' do
-          put '/message', 'hello'
+          #put '/message', 'hello'
+          put '/message', {message_text:'hello'}.to_json, {'content-type' => 'application/json'}
           get '/dashboard'
           expect(last_response.body).to eq('hello')
         end
 
         it 'should not overwrite message if post message is empty' do
-          put '/message', ''
+          #put '/message', ''
+          put '/message', {message_text:''}.to_json, {'content-type' => 'application/json'}
           get '/dashboard'
           expect(last_response.body).to eq existing_message
         end
@@ -101,7 +87,8 @@ describe 'WebPageDashBoard' do
         let(:existing_message) { "G'day" }
 
         before do
-          put '/message', existing_message
+          put '/message', {message_text:existing_message}.to_json, {'content-type' => 'application/json'}
+
         end
 
         it 'should delete a message' do
@@ -127,9 +114,10 @@ describe 'WebPageDashBoard' do
       end
     end
 
-  it 'example' do
-    expect(Date).to receive(:today).and_return(Date.new(2014,9,23))
-  end
+
+  #it 'example' do
+  #  expect(Date).to receive(:today).and_return(Date.new(2014,9,23))
+  #end
 end
 
 

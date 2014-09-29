@@ -17,7 +17,15 @@ class WebPageDashBoard < Sinatra::Application
 
   put '/message' do
     body = JSON.parse(request.body.read)
-    MessageHandler.new.store_message(body['message_text'], Date.parse(body['expiry_date']))
+    expiry_date_message=body['expiry_date']
+
+    if expiry_date_message.nil?
+      #p 'nil is fine'
+      MessageHandler.new.store_message(body['message_text'])
+    else
+      MessageHandler.new.store_message(body['message_text'], Date.parse(body['expiry_date']))
+    end
+
   end
 
   delete '/message' do
