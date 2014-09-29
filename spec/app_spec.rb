@@ -48,6 +48,12 @@ describe 'WebPageDashBoard' do
         expect(last_response.status).to eq(200)
       end
 
+      it 'should return a 400 bad request wrong date' do
+        message = 'hello world'
+        put '/message', {message_text:message,expiry_date:'2014-15-29'}.to_json, {'content-type' => 'application/json'}
+        expect(last_response.status).to eq(400)
+      end
+
       it 'should update the message' do
         message = 'hello world'
         put '/message', {message_text:message}.to_json, {'content-type' => 'application/json'}
