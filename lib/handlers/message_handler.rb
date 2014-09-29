@@ -35,11 +35,9 @@ class MessageHandler
   end
 
  
-  def store_message ( msg, date )
+  def store_message ( msg, date, expPeriod)
     raise RuntimeError if date.nil?
-
     if !msg.nil? && !msg.empty?
-
       MessageRepository.message = msg
       MessageRepository.expiryDate = date
     end
@@ -51,9 +49,17 @@ class MessageHandler
     @status = false
     if !MessageRepository.message.nil?
       MessageRepository.message = ''
+      MessageRepository.expiryDate = ''
       @status = true
     end
     @status
+  end
+
+
+  def auto_msg_expiry
+    if get_date_message < Date.today
+       delete_message
+    end
   end
 end
 
