@@ -10,7 +10,6 @@ class WebPageDashBoard < Sinatra::Application
 
   attr_accessor :param
 
-  DEFAULT_CONSTANCE
   get '/dashboard' do
     MessageHandler.new.get_message
   end
@@ -18,11 +17,15 @@ class WebPageDashBoard < Sinatra::Application
 
   put '/message' do
     body = JSON.parse(request.body.read)
-    if body['expiry_date'].nil?
+    expiry_date_message=body['expiry_date']
 
+    if expiry_date_message.nil?
+      #p 'nil is fine'
+      MessageHandler.new.store_message(body['message_text'])
+    else
+      MessageHandler.new.store_message(body['message_text'], Date.parse(body['expiry_date']))
     end
-    raise RuntimeError if date.nil? if Date.parse()
-    MessageHandler.new.store_message(body['message_text'], Date.parse(body['expiry_date']))
+
   end
 
   delete '/message' do

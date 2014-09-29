@@ -2,6 +2,9 @@ require_relative '../../lib/services/message__repository'
 require 'date'
 #require 'active_support/time'
 
+DEFAULT_PERIOD_EXPIRE = 5   #days
+
+
 class MessageHandler
 
 
@@ -35,7 +38,8 @@ class MessageHandler
   end
 
  
-  def store_message ( msg, date)
+  def store_message ( msg, date = Date.today + DEFAULT_PERIOD_EXPIRE )
+    p date
     #@sta = false
     raise RuntimeError if date.nil?
     if !msg.nil? && !msg.empty?
@@ -45,6 +49,8 @@ class MessageHandler
     end
    # @sta
   end
+
+
 
 
 
