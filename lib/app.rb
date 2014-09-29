@@ -17,9 +17,6 @@ class WebPageDashBoard < Sinatra::Application
 
   put '/message' do
     MessageHandler.new.store_message(request.body.read, Date.today)
-
-
-
   end
 
   delete '/message' do
