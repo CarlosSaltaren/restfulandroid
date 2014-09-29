@@ -23,20 +23,13 @@ class WebPageDashBoard < Sinatra::Application
       #p 'nil is fine'
       MessageHandler.new.store_message(body['message_text'])
     else
-
       d = Date.parse(expiry_date_message) rescue nil
-      p d
       if d
-
         MessageHandler.new.store_message(body['message_text'], Date.parse(body['expiry_date']))
       else
         status 400
       end
-
-
-
     end
-
   end
 
   delete '/message' do
@@ -44,6 +37,9 @@ class WebPageDashBoard < Sinatra::Application
       status 404
     end
   end
+
+  post
+
 
 
 end
