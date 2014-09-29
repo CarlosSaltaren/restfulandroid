@@ -47,7 +47,7 @@ describe 'WebPageDashBoard' do
 
       it 'should update the message' do
         message = 'hello world'
-        put '/message', message
+        put '/message', {message_text:message,expiry_date:nil}.to_json, {'content-type' => 'application/json'}
         get '/dashboard'
         expect(last_response.body).to eq(message)
       end
@@ -107,10 +107,6 @@ describe 'WebPageDashBoard' do
         end
       end
     end
-
-  it 'example' do
-    expect(Date).to receive(:today).and_return(Date.new(2014,9,23))
-  end
 end
 
 
