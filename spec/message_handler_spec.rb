@@ -129,20 +129,4 @@ describe MessageHandler do
       end
     end
   end
-
-  #Auto Message Delete Based On Expiry Date
-  describe 'auto_msg_expiry' do
-    context 'Given there is a stored message' do
-      before do
-        expDays = 3
-        currentDate = Date.today - 6
-        MessageRepository.message = 'This message has an expired date'
-        MessageRepository.expiryDate = currentDate + expDays
-      end
-      it 'should delete when message date is expired' do
-        expect(subject.auto_msg_expiry).to eq true
-
-      end
-    end
-  end
 end
