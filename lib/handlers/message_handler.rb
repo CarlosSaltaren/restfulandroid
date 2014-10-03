@@ -1,4 +1,5 @@
 require_relative '../../lib/services/message__repository'
+require_relative '../../lib/services/message'
 require 'date'
 #require 'active_support/time'
 
@@ -9,6 +10,8 @@ class MessageHandler
 
 
   #@output = ''
+
+
 
   def initialize
     @output = 'Have a nice day'
@@ -38,6 +41,9 @@ class MessageHandler
 
  
   def store_message ( msg, date = Date.today + DEFAULT_PERIOD_EXPIRE )
+
+    #p date
+    #@sta = false
     raise RuntimeError if date.nil?
     if !msg.nil? && !msg.empty?
       MessageRepository.message = msg
@@ -46,6 +52,22 @@ class MessageHandler
     end
   end
 
+
+
+  def add_message ( msg, date = Date.today + DEFAULT_PERIOD_EXPIRE , id )
+
+    @@message = Message
+    @@message.message = msg
+    @@message.expiryDate = date
+    MessageRepository.add_message @@message ,id
+    return MessageRepository.get_number_of_message
+
+  end
+
+
+  def get_number_of_message
+    return MessageRepository.get_number_of_message
+  end
 
 
 

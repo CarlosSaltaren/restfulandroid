@@ -105,29 +105,52 @@ describe MessageHandler do
 
     end
 
+    context 'there are more than one message to be stored' do
+      before do
+        @dateMessage = Date.today
+      end
+      it 'returns all the messages that we have' do
+        subject.add_message  'Hi there message one' , @dateMessage , 1
+        subject.add_message  'Hi there message two' , @dateMessage , 2
+        expect(subject.get_number_of_message).equal?  100
+      end
+
+    end
+
+
+
     it 'throws error when date not given' do
       expect { subject.store_message('whatever', nil) }.to raise_error
     end
+
+
+
+
+
   end
 
   describe 'Delete message' do
-        let(:stored_message) { 'Have a nice day' }
+    let(:stored_message) { 'Have a nice day' }
 
-        context 'Given there is a stored message' do
-          it 'should delete the message' do
+    context 'Given there is a stored message' do
+      it 'should delete the message' do
 
-            MessageRepository.message = nil
-            expect(subject.get_message).to eq stored_message
+        MessageRepository.message = nil
+        expect(subject.get_message).to eq stored_message
 
-          end
-        end
+      end
+    end
 
-        context 'When there is no message stored' do
-          it 'should not throw an error' do
-            MessageRepository.message = ''
-            expect(subject.get_message).to eq stored_message
-          end
+    context 'When there is no message stored' do
+      it 'should not throw an error' do
+        MessageRepository.message = ''
+        expect(subject.get_message).to eq stored_message
+      end
     end
   end
+
+
+
+
 
 end

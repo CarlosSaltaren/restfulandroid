@@ -11,19 +11,23 @@ class WebPageDashBoard < Sinatra::Application
   attr_accessor :param
 
   get '/dashboard' do
-    MessageHandler.new.get_message
+    body(MessageHandler.new.get_message) # <-- This is the response body
   end
 
+  get '/junk' do
+    status 200
+    body ["Hello"].to_json
+  end
 
   post '/message' do
-    body = JSON.parse(request.body.read)
-    expiry_date_message=body['expiry_date']
+    request_body = JSON.parse(request.body.read)
+    expiry_date_message=request_body['expiry_date']
     if expiry_date_message.nil?
-      MessageHandler.new.store_message(body['message_text'])
+      MessageHandler.new.store_message(request_body['message_text'])
     else
       d = Date.parse(expiry_date_message) rescue nil
       if d
-        MessageHandler.new.store_message(body['message_text'], Date.parse(body['expiry_date']))
+        MessageHandler.new.store_message(request_body['message_text'], Date.parse(request_body['expiry_date']))
       else
         status 400
       end
@@ -35,6 +39,7 @@ class WebPageDashBoard < Sinatra::Application
       status 404
     end
   end
+
 
 
 end
