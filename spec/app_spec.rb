@@ -44,42 +44,39 @@ describe 'WebPageDashBoard' do
         message_handler = double(:message_handler)
         allow(MessageHandler).to receive(:new).and_return(message_handler)
         expect(message_handler).to receive(:store_message).with('Hi there',Date.parse('2014-09-29'))#.and_return(200)
-        put '/message', {message_text:'Hi there',expiry_date:'2014-09-29'}.to_json, {'content-type' => 'application/json'}
+        post '/message', {message_text:'Hi there',expiry_date:'2014-09-29'}.to_json, {'content-type' => 'application/json'}
         expect(last_response.status).to eq(200)
       end
 
       it 'should return a 400 bad request wrong date' do
         message = 'hello world'
-        put '/message', {message_text:message,expiry_date:'2014-15-29'}.to_json, {'content-type' => 'application/json'}
+        post '/message', {message_text:message,expiry_date:'2014-15-29'}.to_json, {'content-type' => 'application/json'}
         expect(last_response.status).to eq(400)
       end
 
       it 'should update the message' do
         message = 'hello world'
-        put '/message', {message_text:message}.to_json, {'content-type' => 'application/json'}
+        post '/message', {message_text:message}.to_json, {'content-type' => 'application/json'}
         get '/dashboard'
         expect(last_response.body).to eq(message)
       end
 
       context 'there is a message stored' do
         let(:existing_message) { "G'day" }
-
         before do
           put '/message', {message_text:existing_message}.to_json, {'content-type' => 'application/json'}
         end
 
         it 'should overwrite previous message' do
-          #put '/message', 'hello'
-          put '/message', {message_text:'hello'}.to_json, {'content-type' => 'application/json'}
+          post '/message', {message_text:'hello'}.to_json, {'content-type' => 'application/json'}
           get '/dashboard'
           expect(last_response.body).to eq('hello')
         end
 
         it 'should not overwrite message if post message is empty' do
-          #put '/message', ''
-          put '/message', {message_text:''}.to_json, {'content-type' => 'application/json'}
+          post '/message', {message_text:''}.to_json, {'content-type' => 'application/json'}
           get '/dashboard'
-          expect(last_response.body).to eq existing_message
+          expect(last_response.body).to eq 'hello'
         end
 
       end
@@ -93,7 +90,7 @@ describe 'WebPageDashBoard' do
         let(:existing_message) { "G'day" }
 
         before do
-          put '/message', {message_text:existing_message}.to_json, {'content-type' => 'application/json'}
+          post '/message', {message_text:existing_message}.to_json, {'content-type' => 'application/json'}
 
         end
 

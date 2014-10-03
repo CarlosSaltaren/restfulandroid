@@ -105,9 +105,28 @@ describe MessageHandler do
 
     end
 
+    context 'there are more than one message to be stored' do
+      before do
+        @dateMessage = Date.today
+      end
+      it 'returns all the messages that we have' do
+        subject.add_message  'Hi there message one' , @dateMessage , 1
+        subject.add_message  'Hi there message two' , @dateMessage , 2
+        expect(subject.get_number_of_message).equal?  100
+      end
+
+    end
+
+
+
     it 'throws error when date not given' do
       expect { subject.store_message('whatever', nil) }.to raise_error
     end
+
+
+
+
+
   end
 
   describe 'Delete message' do
@@ -129,4 +148,9 @@ describe MessageHandler do
       end
     end
   end
+
+
+
+
+
 end
