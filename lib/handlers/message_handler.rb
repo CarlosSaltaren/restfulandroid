@@ -1,6 +1,7 @@
 require_relative '../../lib/services/message__repository'
 require_relative '../../lib/services/message'
 require 'date'
+require 'securerandom'
 #require 'active_support/time'
 
 DEFAULT_PERIOD_EXPIRE = 5   #days
@@ -44,6 +45,7 @@ class MessageHandler
 
     #p date
     #@sta = false
+
     raise RuntimeError if date.nil?
     if !msg.nil? && !msg.empty?
       MessageRepository.message = msg
@@ -54,13 +56,15 @@ class MessageHandler
 
 
 
-  def add_message ( msg, date = Date.today + DEFAULT_PERIOD_EXPIRE , id )
+  def add_message( msg, date = Date.today + DEFAULT_PERIOD_EXPIRE)
+    @new_message = Message.new  #create an instance of the method
+    @new_message.message msg #write message to the instance
+    @new_message.expiryDate date # write date to the instance
+    @id  = secureRandom.hex(3) # generate secure rundom id for the message
 
-    @@message = Message
-    @@message.message = msg
-    @@message.expiryDate = date
-    MessageRepository.add_message @@message ,id
-    return MessageRepository.get_number_of_message
+    MessageRepository.add_message @new_message ,@id # store the message onbject
+    return @id
+    p 'am here'
 
   end
 

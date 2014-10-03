@@ -3,6 +3,7 @@ require 'rspec/matchers'
 require_relative '../lib/handlers/message_handler'
 require_relative '../lib/services/message__repository'
 require 'date'
+require 'securerandom'
 
 describe MessageHandler do
 
@@ -145,6 +146,7 @@ describe MessageHandler do
       it 'should not throw an error' do
         MessageRepository.message = ''
         expect(subject.get_message).to eq stored_message
+        #p SecureRandom.hex(3)
       end
     end
   end

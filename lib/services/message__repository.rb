@@ -1,4 +1,5 @@
 require_relative 'message'
+require 'securerandom'
 
 class MessageRepository
 
@@ -30,17 +31,13 @@ class MessageRepository
 
 
 
-  def self.add_message (message , id)
-
-
-    #messages[] = message
-    @messages.merge! :id =>  message
-
+  def self.add_message (message, id)
+    #@messages.merge! :id =>  message
+    @messages = {:id =>  message}
   end
 
 
   def self.get_number_of_message
-
     return @messages.length
 
   end
