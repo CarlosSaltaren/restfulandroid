@@ -34,7 +34,7 @@ class MessageRepository
 
 
     #messages[] = message
-    info = 'hi'
+
     @messages[id] = message
 
   end
@@ -46,6 +46,11 @@ class MessageRepository
 
   end
 
+  def  self.get_message_by_index(id)
+
+    return  @messages[id]
+
+  end
 
 
   def  self.get_message(id)

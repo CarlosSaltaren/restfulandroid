@@ -82,6 +82,19 @@ describe 'WebPageDashBoard' do
       end
 
     end
+
+    describe 'POST' do
+      it 'should return a 200 OK' do
+
+        post '/messagesTEST', {message_text:'Hi there',expiry_date:'2014-09-29'}.to_json, {'content-type' => 'application/json'}
+        p last_response.body
+
+
+      end
+    end
+
+
+
   end
 
 

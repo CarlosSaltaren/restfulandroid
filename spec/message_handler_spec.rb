@@ -110,8 +110,9 @@ describe MessageHandler do
         @dateMessage = Date.today
       end
       it 'returns all the messages that we have' do
-        subject.add_message  'Hi there message one' , @dateMessage , 1
-        subject.add_message  'Hi there message two' , @dateMessage -1000 , 2
+        subject.add_message  'Hi there message one'
+        subject.add_message  'Hi there message one' , @dateMessage
+        subject.add_message  'Hi there message two' , @dateMessage -1000
         expect(subject.get_number_of_message).equal?  100
       end
 

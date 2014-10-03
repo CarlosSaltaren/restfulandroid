@@ -1,6 +1,7 @@
 require_relative '../../lib/services/message__repository'
 require_relative '../../lib/services/message'
 require 'date'
+require 'SecureRandom'
 #require 'active_support/time'
 
 DEFAULT_PERIOD_EXPIRE = 5   #days
@@ -54,16 +55,22 @@ class MessageHandler
 
 
 
-  def add_message ( msg, date = Date.today + DEFAULT_PERIOD_EXPIRE , id )
+  def add_message ( msg, date = Date.today + DEFAULT_PERIOD_EXPIRE )
 
+    id = SecureRandom.uuid
     message = Message.new
     message.message = msg
     message.expiryDate = date
     MessageRepository.add_message message ,id
-    return MessageRepository.get_number_of_message
+    return MessageRepository.id
 
   end
 
+  def get_message_by_index ( id )
+
+    return MessageRepository.get_message_by_index id
+
+  end
 
   def get_number_of_message
     return MessageRepository.get_number_of_message
