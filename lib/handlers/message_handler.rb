@@ -36,6 +36,7 @@ class MessageHandler
       end
     end
   end
+
   def get_date_message
       MessageRepository.expiryDate
   end
@@ -45,26 +46,22 @@ class MessageHandler
 
     #p date
     #@sta = false
-
     raise RuntimeError if date.nil?
     if !msg.nil? && !msg.empty?
       MessageRepository.message = msg
       MessageRepository.expiryDate = date
-      messageArray = {}
     end
   end
 
 
 
-  def add_message( msg, date = Date.today + DEFAULT_PERIOD_EXPIRE)
-    @new_message = Message.new  #create an instance of the method
-    @new_message.message msg #write message to the instance
-    @new_message.expiryDate date # write date to the instance
-    @id  = secureRandom.hex(3) # generate secure rundom id for the message
+  def add_message ( msg, date = Date.today + DEFAULT_PERIOD_EXPIRE , id )
 
-    MessageRepository.add_message @new_message ,@id # store the message onbject
-    return @id
-    p 'am here'
+    @@message = Message
+    @@message.message = msg
+    @@message.expiryDate = date
+    MessageRepository.add_message @@message ,id
+    return MessageRepository.get_number_of_message
 
   end
 

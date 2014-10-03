@@ -1,5 +1,4 @@
 require_relative 'message'
-require 'securerandom'
 
 class MessageRepository
 
@@ -38,6 +37,7 @@ class MessageRepository
 
 
   def self.get_number_of_message
+
     return @messages.length
 
   end
