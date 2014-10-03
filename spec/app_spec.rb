@@ -116,11 +116,6 @@ describe 'WebPageDashBoard' do
         end
       end
     end
-
-
-  #it 'example' do
-  #  expect(Date).to receive(:today).and_return(Date.new(2014,9,23))
-  #end
 end
 
 
