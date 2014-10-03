@@ -3,21 +3,30 @@ class Message
   @expiryDate = nil
 
 
-  def self.message=(msg)
+
+
+  def initialize msg,date
+    @message = msg
+    @expiryDate = date
+
+  end
+
+
+  def message=(msg)
     @message = msg
   end
 
 
-  def self.expiryDate=(expiry_date)
+  def expiryDate=(expiry_date)
     @expiryDate=expiry_date
   end
 
 
-  def self.message
+  def message
     @message
   end
 
-  def self.expiryDate
+  def expiryDate
     @expiryDate
   end
 end

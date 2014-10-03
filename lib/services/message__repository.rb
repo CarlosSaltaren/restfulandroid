@@ -30,9 +30,10 @@ class MessageRepository
 
 
 
-  def self.add_message (message, id)
-    #@messages.merge! :id =>  message
-    @messages = {:id =>  message}
+  def self.add_message (message , id)
+    @messages[id] = message
+    p @messages
+
   end
 
 

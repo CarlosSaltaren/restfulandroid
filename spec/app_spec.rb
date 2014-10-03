@@ -85,11 +85,23 @@ describe 'WebPageDashBoard' do
 
     describe 'POST' do
       it 'should return an id when I post a message' do
-        message_handler = double(:message_handler)
-        allow(MessageHandler).to receive(:new).and_return(message_handler)
-        expect(message_handler).to receive(:add_message).with('Hi there Thoughtworkers',Date.parse('2014-09-29'))#.and_return(200)
+        # message_handler = double(:message_handler)
+        # allow(MessageHandler).to receive(:new).and_return(message_handler)
+        # expect(message_handler).to receive(:add_message).with('Hi there Thoughtworkers',Date.parse('2014-09-29'))#.and_return(200)
         post '/newmessages', {message_text:'Hi there Thoughtworkers',expiry_date:'2014-09-29'}.to_json, {'content-type' => 'application/json'}
-        #expect(last_response.body).to eq(200)
+        expect(last_response.status).to eq(200)
+
+        post '/newmessages', {message_text:'Hi Carlos',expiry_date:'2014-09-28'}.to_json, {'content-type' => 'application/json'}
+        expect(last_response.status).to eq(200)
+
+        post '/newmessages', {message_text:'Hi there Martin',expiry_date:'2014-09-30'}.to_json, {'content-type' => 'application/json'}
+        expect(last_response.status).to eq(200)
+
+        post '/newmessages', {message_text:'Hi there Internes',expiry_date:'2014-09-29'}.to_json, {'content-type' => 'application/json'}
+        expect(last_response.status).to eq(200)
+
+
+
       end
 
 
