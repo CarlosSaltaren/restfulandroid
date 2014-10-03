@@ -56,10 +56,10 @@ class MessageHandler
 
   def add_message ( msg, date = Date.today + DEFAULT_PERIOD_EXPIRE , id )
 
-    @@message = Message
-    @@message.message = msg
-    @@message.expiryDate = date
-    MessageRepository.add_message @@message ,id
+    message = Message.new
+    message.message = msg
+    message.expiryDate = date
+    MessageRepository.add_message message ,id
     return MessageRepository.get_number_of_message
 
   end

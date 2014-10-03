@@ -1,23 +1,23 @@
 class Message
-  @@message = ''
-  @@expiryDate = nil
+  @message = ''
+  @expiryDate = nil
 
 
-  def self.message=(msg)
-    @@message = msg
+  def message=(msg)
+    @message = msg
   end
 
 
-  def self.expiryDate=(expiry_date)
-    @@expiryDate=expiry_date
+  def expiryDate=(expiry_date)
+    @expiryDate=expiry_date
   end
 
 
-  def self.message
-    @@message
+  def message
+    @message
   end
 
-  def self.expiryDate
-    @@expiryDate
+  def expiryDate
+    @expiryDate
   end
 end

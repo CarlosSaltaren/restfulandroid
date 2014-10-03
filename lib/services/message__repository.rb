@@ -34,7 +34,8 @@ class MessageRepository
 
 
     #messages[] = message
-    @messages.merge! :id =>  message
+    info = 'hi'
+    @messages[id] = message
 
   end
 
