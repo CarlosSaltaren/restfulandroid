@@ -91,7 +91,6 @@ describe 'WebPageDashBoard' do
 
         before do
           post '/message', {message_text:existing_message}.to_json, {'content-type' => 'application/json'}
-
         end
 
         it 'should delete a message' do

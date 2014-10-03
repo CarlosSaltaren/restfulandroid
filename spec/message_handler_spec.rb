@@ -111,22 +111,23 @@ describe MessageHandler do
   end
 
   describe 'Delete message' do
-    let(:stored_message) { 'Have a nice day' }
+        let(:stored_message) { 'Have a nice day' }
 
-    context 'Given there is a stored message' do
-      it 'should delete the message' do
+        context 'Given there is a stored message' do
+          it 'should delete the message' do
 
-        MessageRepository.message = nil
-        expect(subject.get_message).to eq stored_message
+            MessageRepository.message = nil
+            expect(subject.get_message).to eq stored_message
 
-      end
-    end
+          end
+        end
 
-    context 'When there is no message stored' do
-      it 'should not throw an error' do
-        MessageRepository.message = ''
-        expect(subject.get_message).to eq stored_message
-      end
+        context 'When there is no message stored' do
+          it 'should not throw an error' do
+            MessageRepository.message = ''
+            expect(subject.get_message).to eq stored_message
+          end
     end
   end
+
 end

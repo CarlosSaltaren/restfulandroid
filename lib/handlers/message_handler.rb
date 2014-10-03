@@ -32,7 +32,6 @@ class MessageHandler
       end
     end
   end
-
   def get_date_message
       MessageRepository.expiryDate
   end
@@ -43,6 +42,7 @@ class MessageHandler
     if !msg.nil? && !msg.empty?
       MessageRepository.message = msg
       MessageRepository.expiryDate = date
+      messageArray = {}
     end
   end
 
