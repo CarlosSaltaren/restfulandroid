@@ -58,11 +58,10 @@ class MessageHandler
   def add_message ( msg, date = Date.today + DEFAULT_PERIOD_EXPIRE )
 
     id = SecureRandom.uuid
-    message = Message.new
-    message.message = msg
-    message.expiryDate = date
+    message = Message.new msg,date
     MessageRepository.add_message message ,id
-    return MessageRepository.id
+
+    id
 
   end
 

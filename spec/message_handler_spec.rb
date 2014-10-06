@@ -113,7 +113,7 @@ describe MessageHandler do
         subject.add_message  'Hi there message one'
         subject.add_message  'Hi there message one' , @dateMessage
         subject.add_message  'Hi there message two' , @dateMessage -1000
-        expect(subject.get_number_of_message).equal?  100
+        expect(subject.get_number_of_message).equal?  3
       end
 
     end

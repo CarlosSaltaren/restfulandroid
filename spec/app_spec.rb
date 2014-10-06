@@ -25,7 +25,27 @@ describe 'WebPageDashBoard' do
         get '/dashboard'
         expect(last_response.body).to eq 'something'
       end
+
+
+      it 'gets all active messages' do
+        begin
+
+          post '/messagesTEST', {message_text:'Hi there',expiry_date:'2014-09-29'}.to_json, {'content-type' => 'application/json'}
+
+          expect((JSON.parse( last_response.body))['idmessage']).to eq('111')
+
+          #id = UUID.isv
+
+        end
+       end
+
     end
+
+
+
+
+
+
 
       it 'should return a 200 OK' do
         get '/dashboard'
@@ -87,8 +107,9 @@ describe 'WebPageDashBoard' do
       it 'should return a 200 OK' do
 
         post '/messagesTEST', {message_text:'Hi there',expiry_date:'2014-09-29'}.to_json, {'content-type' => 'application/json'}
-        p last_response.body
 
+
+        expect((JSON.parse( last_response.body))['idmessage']).to eq('111')
 
       end
     end

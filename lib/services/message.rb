@@ -3,6 +3,15 @@ class Message
   @@expiryDate = nil
 
 
+
+
+  def initialize msg,date
+    @message = msg
+    @expiryDate = date
+
+  end
+
+
   def message=(msg)
     @@message = msg
   end

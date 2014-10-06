@@ -46,13 +46,17 @@ class WebPageDashBoard < Sinatra::Application
         msgHandler = MessageHandler.new
         id = msgHandler.add_message(request_body['message_text'], Date.parse(request_body['expiry_date']))
         p id
-        body [msgHandler.get_message_by_index id].to_json
+        body(idmessage: id).to_json
+
+
 
       else
         status 400
       end
     end
   end
+
+
 
 
 
