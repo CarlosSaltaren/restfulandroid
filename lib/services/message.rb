@@ -6,8 +6,8 @@ class Message
 
 
   def initialize msg,date
-    @message = msg
-    @expiryDate = date
+    @@message = msg
+    @@expiryDate = date
 
   end
 
