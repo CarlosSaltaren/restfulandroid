@@ -21,9 +21,7 @@ class MessageHandler
 
   def get_message
     if MessageRepository.message.nil? || MessageRepository.message.empty?
-
       @output
-      #'Have a nice day'
     else
       if !MessageRepository.expiryDate.nil? && !MessageRepository.expiryDate.nil?
         if MessageRepository.expiryDate < Date.today
@@ -60,8 +58,7 @@ class MessageHandler
     id = SecureRandom.uuid
     message = Message.new msg,date
     MessageRepository.add_message message ,id
-
-    id
+    return id
 
   end
 

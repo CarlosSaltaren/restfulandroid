@@ -27,17 +27,17 @@ describe 'WebPageDashBoard' do
       end
 
 
-      it 'gets all active messages' do
-        begin
+      # it 'gets all active messages' do
+      #   begin
 
-          post '/messagesTEST', {message_text:'Hi there',expiry_date:'2014-09-29'}.to_json, {'content-type' => 'application/json'}
+          # post '/messagesTEST', {message_text:'Hi there',expiry_date:'2014-09-29'}.to_json, {'content-type' => 'application/json'}
 
-          expect((JSON.parse( last_response.body))['idmessage']).to eq('111')
+          #expect((JSON.parse( last_response.body))['idmessage']).to eq('111')
 
           #id = UUID.isv
 
-        end
-       end
+        # end
+       # end
 
     end
 
@@ -76,8 +76,8 @@ describe 'WebPageDashBoard' do
 
       it 'should update the message' do
         message = 'hello world'
-        post '/message', {message_text:message}.to_json, {'content-type' => 'application/json'}
-        get '/dashboard'
+        id =post '/message', {message_text:message}.to_json, {'content-type' => 'application/json'}
+        get '/dashboard',{msgid:id}.to_json, {'content-type' => 'application/json'}
         expect(last_response.body).to eq(message)
       end
 
@@ -103,20 +103,29 @@ describe 'WebPageDashBoard' do
 
     end
 
-    describe 'POST' do
-      it 'should return a 200 OK' do
+    # describe 'POST' do
+    #   it 'should return a 200 OK' do
+    #     post '/messagesTEST', {message_text:'Hi there',expiry_date:'2014-09-29'}.to_json, {'content-type' => 'application/json'}
+    #     expect((JSON.parse( last_response.body))['idmessage']).to eq('111')
+    #   end
+    # end
 
-        post '/messagesTEST', {message_text:'Hi there',expiry_date:'2014-09-29'}.to_json, {'content-type' => 'application/json'}
 
+      it 'should return an id when I post a message' do
+        post '/newmessages', {message_text:'Hi there Thoughtworkers',expiry_date:'2014-09-29'}.to_json, {'content-type' => 'application/json'}
+        expect(last_response.status).to eq(200)
 
-        expect((JSON.parse( last_response.body))['idmessage']).to eq('111')
+        post '/newmessages', {message_text:'Hi Carlos',expiry_date:'2014-09-28'}.to_json, {'content-type' => 'application/json'}
+        expect(last_response.status).to eq(200)
 
+        post '/newmessages', {message_text:'Hi there Martin',expiry_date:'2014-09-30'}.to_json, {'content-type' => 'application/json'}
+        expect(last_response.status).to eq(200)
+
+        post '/newmessages', {message_text:'Hi there Internes',expiry_date:'2014-09-29'}.to_json, {'content-type' => 'application/json'}
+        expect(last_response.status).to eq(200)
       end
     end
 
-
-
-  end
 
 
     describe 'DELETE' do
