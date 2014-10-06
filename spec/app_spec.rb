@@ -25,7 +25,27 @@ describe 'WebPageDashBoard' do
         get '/dashboard'
         expect(last_response.body).to eq 'something'
       end
+
+
+      # it 'gets all active messages' do
+      #   begin
+
+          # post '/messagesTEST', {message_text:'Hi there',expiry_date:'2014-09-29'}.to_json, {'content-type' => 'application/json'}
+
+          #expect((JSON.parse( last_response.body))['idmessage']).to eq('111')
+
+          #id = UUID.isv
+
+        # end
+       # end
+
     end
+
+
+
+
+
+
 
       it 'should return a 200 OK' do
         get '/dashboard'
@@ -83,7 +103,14 @@ describe 'WebPageDashBoard' do
 
     end
 
-    describe 'POST' do
+    # describe 'POST' do
+    #   it 'should return a 200 OK' do
+    #     post '/messagesTEST', {message_text:'Hi there',expiry_date:'2014-09-29'}.to_json, {'content-type' => 'application/json'}
+    #     expect((JSON.parse( last_response.body))['idmessage']).to eq('111')
+    #   end
+    # end
+
+
       it 'should return an id when I post a message' do
         post '/newmessages', {message_text:'Hi there Thoughtworkers',expiry_date:'2014-09-29'}.to_json, {'content-type' => 'application/json'}
         expect(last_response.status).to eq(200)
@@ -98,7 +125,7 @@ describe 'WebPageDashBoard' do
         expect(last_response.status).to eq(200)
       end
     end
-  end
+
 
 
     describe 'DELETE' do
@@ -107,6 +134,7 @@ describe 'WebPageDashBoard' do
 
         before do
           post '/message', {message_text:existing_message}.to_json, {'content-type' => 'application/json'}
+
         end
 
         it 'should delete a message' do

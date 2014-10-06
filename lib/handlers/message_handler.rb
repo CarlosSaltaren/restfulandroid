@@ -1,7 +1,7 @@
 require_relative '../../lib/services/message__repository'
 require_relative '../../lib/services/message'
 require 'date'
-require 'securerandom'
+require 'SecureRandom'
 #require 'active_support/time'
 
 DEFAULT_PERIOD_EXPIRE = 5   #days
@@ -35,8 +35,6 @@ class MessageHandler
     end
   end
 
-
-
   def get_date_message
       MessageRepository.expiryDate
   end
@@ -46,27 +44,29 @@ class MessageHandler
 
     #p date
     #@sta = false
-
     raise RuntimeError if date.nil?
     if !msg.nil? && !msg.empty?
       MessageRepository.message = msg
       MessageRepository.expiryDate = date
-      messageArray = {}
     end
   end
 
 
 
-  def add_message (msg, date = Date.today + DEFAULT_PERIOD_EXPIRE)
-    id = SecureRandom.hex(3)
+  def add_message ( msg, date = Date.today + DEFAULT_PERIOD_EXPIRE )
 
-    messageObj = Message.new msg, date
-    # p id
-    # p messageObj.message
-    MessageRepository.add_message messageObj ,id
+    id = SecureRandom.uuid
+    message = Message.new msg,date
+    MessageRepository.add_message message ,id
     return id
+
   end
 
+  def get_message_by_index ( id )
+
+    return MessageRepository.get_message_by_index id
+
+  end
 
   def get_number_of_message
     return MessageRepository.get_number_of_message

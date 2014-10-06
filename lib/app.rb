@@ -11,9 +11,15 @@ class WebPageDashBoard < Sinatra::Application
   attr_accessor :param
 
   get '/dashboard' do
+<<<<<<< HEAD
     body(MessageHandler.new.get_message)
     # request_body = JSON.parse(request.body.read)
     # body(MessageHandler.new.get_message(request_body['msgid'])) # <-- This is the response body
+=======
+    # MessageHandler.new.get_message()
+    #request_body = JSON.parse(request.body.read)
+    body(MessageHandler.new.get_message) # <-- This is the response body
+>>>>>>> a1faf613ef835bad26f0069f2cabc2824b043a8f
   end
 
   get '/junk' do
@@ -45,15 +51,20 @@ class WebPageDashBoard < Sinatra::Application
     expiry_date_message=request_body['expiry_date']
     if expiry_date_message.nil?
       @message_id = MessageHandler.new.add_message(request_body['message_text'])
+      return @message_id
     else
       d = Date.parse(expiry_date_message) rescue nil
       if d
         @message_id = MessageHandler.new.add_message(request_body['message_text'], Date.parse(request_body['expiry_date']))
+        #body(idmessage: id).to_json
+        return @message_id
       else
         status 400
       end
     end
   end
+
+
 
 
 
