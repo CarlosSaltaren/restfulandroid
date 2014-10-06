@@ -1,7 +1,7 @@
 require_relative '../../lib/services/message__repository'
 require_relative '../../lib/services/message'
 require 'date'
-
+require 'SecureRandom'
 #require 'active_support/time'
 
 DEFAULT_PERIOD_EXPIRE = 5   #days
