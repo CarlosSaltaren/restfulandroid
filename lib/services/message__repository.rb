@@ -26,14 +26,10 @@ class MessageRepository
     @@expiryDate
   end
 
-  #Array[Message] objMessage;
-
 
 
   def self.add_message (message , id)
     @messages[id] = message
-    p @messages
-
   end
 
 

@@ -19,11 +19,9 @@ class MessageHandler
   end
 
 
-  def get_message
+  def get_message id
     if MessageRepository.message.nil? || MessageRepository.message.empty?
-
       @output
-      #'Have a nice day'
     else
       if !MessageRepository.expiryDate.nil? && !MessageRepository.expiryDate.nil?
         if MessageRepository.expiryDate < Date.today
@@ -36,6 +34,9 @@ class MessageHandler
       end
     end
   end
+
+
+
   def get_date_message
       MessageRepository.expiryDate
   end
@@ -60,13 +61,10 @@ class MessageHandler
     id = SecureRandom.hex(3)
 
     messageObj = Message.new msg, date
-    # messageObj.message msg
-    # messageObj.expiryDate date
-   # p id
+    # p id
+    # p messageObj.message
     MessageRepository.add_message messageObj ,id
-    #p messageObj.message
-    # return MessageRepository.get_number_of_message
-
+    return id
   end
 
 

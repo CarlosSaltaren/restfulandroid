@@ -56,8 +56,8 @@ describe 'WebPageDashBoard' do
 
       it 'should update the message' do
         message = 'hello world'
-        post '/message', {message_text:message}.to_json, {'content-type' => 'application/json'}
-        get '/dashboard'
+        id =post '/message', {message_text:message}.to_json, {'content-type' => 'application/json'}
+        get '/dashboard',{msgid:id}.to_json, {'content-type' => 'application/json'}
         expect(last_response.body).to eq(message)
       end
 
@@ -85,9 +85,6 @@ describe 'WebPageDashBoard' do
 
     describe 'POST' do
       it 'should return an id when I post a message' do
-        # message_handler = double(:message_handler)
-        # allow(MessageHandler).to receive(:new).and_return(message_handler)
-        # expect(message_handler).to receive(:add_message).with('Hi there Thoughtworkers',Date.parse('2014-09-29'))#.and_return(200)
         post '/newmessages', {message_text:'Hi there Thoughtworkers',expiry_date:'2014-09-29'}.to_json, {'content-type' => 'application/json'}
         expect(last_response.status).to eq(200)
 
@@ -99,16 +96,8 @@ describe 'WebPageDashBoard' do
 
         post '/newmessages', {message_text:'Hi there Internes',expiry_date:'2014-09-29'}.to_json, {'content-type' => 'application/json'}
         expect(last_response.status).to eq(200)
-
-
-
       end
-
-
-
     end
-
-
   end
 
 
