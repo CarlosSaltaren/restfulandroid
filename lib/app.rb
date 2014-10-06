@@ -11,8 +11,9 @@ class WebPageDashBoard < Sinatra::Application
   attr_accessor :param
 
   get '/dashboard' do
-    request_body = JSON.parse(request.body.read)
-    body(MessageHandler.new.get_message(request_body['msgid'])) # <-- This is the response body
+    body(MessageHandler.new.get_message)
+    # request_body = JSON.parse(request.body.read)
+    # body(MessageHandler.new.get_message(request_body['msgid'])) # <-- This is the response body
   end
 
   get '/junk' do
@@ -52,7 +53,6 @@ class WebPageDashBoard < Sinatra::Application
         status 400
       end
     end
-    p @id
   end
 
 

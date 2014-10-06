@@ -19,7 +19,7 @@ class MessageHandler
   end
 
 
-  def get_message id
+  def get_message
     if MessageRepository.message.nil? || MessageRepository.message.empty?
       @output
     else
