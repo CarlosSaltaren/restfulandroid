@@ -17,7 +17,6 @@ describe 'WebPageDashBoard' do
   describe 'URI: /dashboard' do
     describe 'GET' do
       it 'gets the message from the message handler' do
-      begin
         message_handler = double(:message_handler)
         allow(message_handler).to receive(:new).and_return(message_handler)
         allow(MessageHandler).to receive(:new).and_return(message_handler)
@@ -25,35 +24,10 @@ describe 'WebPageDashBoard' do
         get '/dashboard'
         expect(last_response.body).to eq 'something'
       end
-
-
-      # it 'gets all active messages' do
-      #   begin
-
-          # post '/messagesTEST', {message_text:'Hi there',expiry_date:'2014-09-29'}.to_json, {'content-type' => 'application/json'}
-
-          #expect((JSON.parse( last_response.body))['idmessage']).to eq('111')
-
-          #id = UUID.isv
-
-        # end
-       # end
-
-    end
-
-
-
-
-
-
-
       it 'should return a 200 OK' do
         get '/dashboard'
         expect(last_response.status).to eq(200)
       end
-
-
-
     end
   end
 
@@ -63,7 +37,7 @@ describe 'WebPageDashBoard' do
       it 'should return a 200 OK' do
         message_handler = double(:message_handler)
         allow(MessageHandler).to receive(:new).and_return(message_handler)
-        expect(message_handler).to receive(:store_message).with('Hi there',Date.parse('2014-09-29'))#.and_return(200)
+        expect(message_handler).to receive(:store_message).with('Hi there',Date.parse('2014-09-29'))
         post '/message', {message_text:'Hi there',expiry_date:'2014-09-29'}.to_json, {'content-type' => 'application/json'}
         expect(last_response.status).to eq(200)
       end
@@ -76,8 +50,8 @@ describe 'WebPageDashBoard' do
 
       it 'should update the message' do
         message = 'hello world'
-        id =post '/message', {message_text:message}.to_json, {'content-type' => 'application/json'}
-        get '/dashboard',{msgid:id}.to_json, {'content-type' => 'application/json'}
+        post '/message', {message_text:message}.to_json, {'content-type' => 'application/json'}
+        get '/dashboard'
         expect(last_response.body).to eq(message)
       end
 
@@ -103,30 +77,39 @@ describe 'WebPageDashBoard' do
 
     end
 
-    # describe 'POST' do
-    #   it 'should return a 200 OK' do
-    #     post '/messagesTEST', {message_text:'Hi there',expiry_date:'2014-09-29'}.to_json, {'content-type' => 'application/json'}
-    #     expect((JSON.parse( last_response.body))['idmessage']).to eq('111')
-    #   end
-    # end
+# new test start here
 
-
+    describe 'POST' do
       it 'should return an id when I post a message' do
-        post '/newmessages', {message_text:'Hi there Thoughtworkers',expiry_date:'2014-09-29'}.to_json, {'content-type' => 'application/json'}
-        expect(last_response.status).to eq(200)
+        #creating a mock for SecureRandom.uuid
+        allow(SecureRandom).to receive(:uuid).and_return('e7832h3', 'e7w32h3', 'e7x32h3','e7b32h3')
 
-        post '/newmessages', {message_text:'Hi Carlos',expiry_date:'2014-09-28'}.to_json, {'content-type' => 'application/json'}
-        expect(last_response.status).to eq(200)
+        post '/messages', {message_text:'Hi there Thoughtworkers',expiry_date:'2014-09-29'}.to_json, {'content-type' => 'application/json'}
+        expect(last_response.body).to eq('e7832h3')
 
-        post '/newmessages', {message_text:'Hi there Martin',expiry_date:'2014-09-30'}.to_json, {'content-type' => 'application/json'}
-        expect(last_response.status).to eq(200)
+        post '/messages', {message_text:'Hi Carlos',expiry_date:'2014-09-28'}.to_json, {'content-type' => 'application/json'}
+        expect(last_response.body).to eq('e7w32h3')
 
-        post '/newmessages', {message_text:'Hi there Internes',expiry_date:'2014-09-29'}.to_json, {'content-type' => 'application/json'}
-        expect(last_response.status).to eq(200)
+        post '/messages', {message_text:'Hi there Martin',expiry_date:'2014-09-30'}.to_json, {'content-type' => 'application/json'}
+        expect(last_response.body).to eq('e7x32h3')
+
+        post '/messages', {message_text:'Hi there Internes',expiry_date:'2014-09-29'}.to_json, {'content-type' => 'application/json'}
+        expect(last_response.body).to eq('e7b32h3')
       end
     end
 
 
+    describe 'GET' do
+      it 'should return a message based on given id' do
+        allow(SecureRandom).to receive(:uuid).and_return('e7832h3xx') #<--- mock SecureRandom
+        post '/messages', {message_text:'Hi there Thoughtworkers',expiry_date:'2014-09-29'}.to_json, {'content-type' => 'application/json'}
+        get '/dashboards',{idmessage:'e7832h3xx'}.to_json, {'content-type' => 'application/json'}
+
+        expect(last_response.body).to eq('Hi there Thoughtworkers')
+      end
+    end
+
+#End of new tests
 
     describe 'DELETE' do
       context 'there is a message to be deleted' do
@@ -159,8 +142,8 @@ describe 'WebPageDashBoard' do
         end
       end
     end
+  end
 end
-
 
 
 

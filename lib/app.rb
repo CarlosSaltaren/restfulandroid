@@ -8,23 +8,20 @@ require 'cgi'
 
 class WebPageDashBoard < Sinatra::Application
 
-  attr_accessor :param
-
   get '/dashboard' do
-<<<<<<< HEAD
+
     body(MessageHandler.new.get_message)
     # request_body = JSON.parse(request.body.read)
     # body(MessageHandler.new.get_message(request_body['msgid'])) # <-- This is the response body
-=======
-    # MessageHandler.new.get_message()
-    #request_body = JSON.parse(request.body.read)
-    body(MessageHandler.new.get_message) # <-- This is the response body
->>>>>>> a1faf613ef835bad26f0069f2cabc2824b043a8f
   end
 
-  get '/junk' do
-    status 200
-    body ["Hello"].to_json
+
+  #stest bit start
+  get '/dashboards' do
+    request_body = JSON.parse(request.body.read)
+    id = request_body['idmessage']
+    p id
+    p body(MessageHandler.new.get_messages(request_body['idmessage'])) # <-- This is the response body
   end
 
   post '/message' do
@@ -45,7 +42,7 @@ class WebPageDashBoard < Sinatra::Application
 
 
 
-  post '/newmessages' do
+  post '/messages' do
     @message_id
     request_body = JSON.parse(request.body.read)
     expiry_date_message=request_body['expiry_date']

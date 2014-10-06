@@ -29,49 +29,28 @@ class MessageRepository
 
 
   def self.add_message (message , id)
-
-
-    #messages[] = message
-
-    @messages[id] = message
-
+    @messages={:id => message}
 
   end
 
 
   def self.get_number_of_message
-
     return @messages.length
-
   end
 
   def  self.get_message_by_index(id)
-
     return  @messages[id]
-
   end
 
 
   def  self.get_message(id)
-
-    {id:1, message:"whatever", expiry_date:Date.new(2014,9,23)}
+   {id:1, message:"whatever", expiry_date:Date.new(2014,9,23)}
     return message
-
   end
 
-
-    #def self.add_message(message)
-
-      # Add the message to the array and assign an ID somehow
-      #{id:1, message:"whatever", expiry_date:Date.new(2014,9,23)}
-    #end
-
-    #def  self.get_message(id)
-
-     # {id:1, message:"whatever", expiry_date:Date.new(2014,9,23)}
-      #return message
-
-    #end
-
+  #test bit
+  def  self.get_messages(id)
+    return @messages[:id]
+  end
 
 end

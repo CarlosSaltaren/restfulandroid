@@ -35,15 +35,26 @@ class MessageHandler
     end
   end
 
+#test bit
+  def get_messages(id)
+    p get_number_of_message
+
+    if get_number_of_message <= 0
+      @output
+    else
+      MessageRepository.get_messages(id)
+    end
+  end
+#end testing bit
+
+
   def get_date_message
       MessageRepository.expiryDate
   end
 
+
  
   def store_message ( msg, date = Date.today + DEFAULT_PERIOD_EXPIRE )
-
-    #p date
-    #@sta = false
     raise RuntimeError if date.nil?
     if !msg.nil? && !msg.empty?
       MessageRepository.message = msg
