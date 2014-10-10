@@ -26,23 +26,6 @@ describe 'WebPageDashBoard' do
       end
 
 
-      it 'gets all active messages' do
-
-
-        post '/messagesTEST', {message_text: 'Hi there', expiry_date: '2014-09-29'}.to_json, {'content-type' => 'application/json'}
-
-        expect((JSON.parse(last_response.body))['idmessage']).to eq('111')
-
-        #id = UUID.isv
-
-        # end
-      end
-
-
-      it 'should return a 200 OK' do
-        get '/dashboard'
-        expect(last_response.status).to eq(200)
-      end
     end
   end
 
@@ -116,16 +99,70 @@ describe 'WebPageDashBoard' do
 
     describe 'GET' do
       it 'should return a message based on given id' do
-        allow(SecureRandom).to receive(:uuid).and_return('e7832h3111') #<--- mock SecureRandom
-        messageTest = 'Hi there ThoughtworkerMartinMartin'
-        post '/messages', {message_text: messageTest, expiry_date: '2014-09-29'}.to_json, {'content-type' => 'application/json'}
-        get '/dashboards?idmessage=e7b32h3lololo'
-
-        p (JSON.parse(last_response.body))['message_text']
-        p (JSON.parse(last_response.body))['expiry_date']
-
-        expect(((JSON.parse(last_response.body))['message_text'])).to eq(messageTest)
+        #allow(SecureRandom).to receive(:uuid).and_return('e7832h3', 'e7w32h3', 'e7x32h3', 'e7b32h3')
+        # messageTest = 'txt one'
+        # post '/messages', {message_text: messageTest, expiry_date: '2000-09-5'}.to_json, {'content-type' => 'application/json'}
+        # messageTest2 = 'txt two'
+        # post '/messages', {message_text: messageTest2, expiry_date: '2000-09-10'}.to_json, {'content-type' => 'application/json'}
+        # id = last_response.body
+        # messageTest = 'txt three'
+        # post '/messages', {message_text: messageTest, expiry_date: '2000-09-15'}.to_json, {'content-type' => 'application/json'}
+        # messageTest = 'txt four'
+        # post '/messages', {message_text: messageTest, expiry_date: '2000-09-20'}.to_json, {'content-type' => 'application/json'}
+        messageTest2 = 'Hi Carlos'
+        id ='e7w32h3'
+        get '/dashboards?idmessage='+id
+        expect(((JSON.parse(last_response.body))['message_text'])).to eq(messageTest2)
       end
+
+
+      it 'should return all active messages with mock' do
+        message_handler = double(:message_handler)
+        allow(message_handler).to receive(:new).and_return(message_handler)
+        allow(MessageHandler).to receive(:new).and_return(message_handler)
+
+        @messagesTest = Hash.new
+        id1 = 'testcode1'
+        message1 = Message.new 'msg1', Date.today - 1000
+        id2 = 'testcode2'
+        message2 = Message.new 'msg2', Date.today
+
+        @messagesTest[id1] = message1
+        @messagesTest[id2] = message2
+        expect(message_handler).to receive(:get_messages).and_return(@messagesTest)
+        get '/messages'
+        parsed = (JSON.parse(last_response.body))
+        count = 0
+        parsed.each do |key, value|
+          count+=1
+        end
+        expect(count).to eq  2
+
+      end
+
+
+      it 'should return all active messages without mock' do
+        allow(SecureRandom).to receive(:uuid).and_return('e7832h3', 'e7w32h3', 'e7x32h3', 'e7b32h3')
+        post '/messages', {message_text: 'Hi there Thoughtworkers', expiry_date: '2014-11-29'}.to_json, {'content-type' => 'application/json'}
+        expect(last_response.body).to eq('e7832h3')
+        post '/messages', {message_text: 'Hi Carlos', expiry_date: '2014-11-28'}.to_json, {'content-type' => 'application/json'}
+        expect(last_response.body).to eq('e7w32h3')
+        post '/messages', {message_text: 'Hi there Martin', expiry_date: '2010-11-30'}.to_json, {'content-type' => 'application/json'}
+        expect(last_response.body).to eq('e7x32h3')
+
+        get '/messages'
+        parsed = (JSON.parse(last_response.body))
+
+        count = 0
+        parsed.each do |key|
+          p key['message']
+          if key['id'] == 'e7832h3'
+            expect(key['message']).to eq 'Hi there Thoughtworkers'
+          end
+        end
+      end
+
+
     end
 
 #End of new tests

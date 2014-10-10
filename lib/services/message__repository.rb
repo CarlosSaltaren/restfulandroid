@@ -3,7 +3,7 @@ require_relative 'message'
 class MessageRepository
 
 
-  @messages = Hash.new
+  @@messageshash = Hash.new
 
   @@message = ''
   @@expiryDate = nil
@@ -28,31 +28,29 @@ class MessageRepository
 
 
 
-  def self.add_message (message , id)
-    @messages={:id => message}
+
+  def add_message (message , id)
+
+    @@messageshash[id] = message
 
   end
 
 
-  def self.get_number_of_message
-    return @messages.length
+  def get_number_of_message
+    return @@messageshash.length
   end
 
-  def  self.get_message_by_index(id)
-    return  @messages[id]
+  def  get_messagesid(id)
+
+    return @@messageshash[id]
+
   end
 
+  def  get_messages
 
-  def  self.get_message(id)
-   {id:1, message:"whatever", expiry_date:Date.new(2014,9,23)}
-    return message
+    return @@messageshash
+
   end
 
-  #test bit
-  def  self.get_messages(id)
-
-
-    return @messages[:id]
-  end
 
 end
