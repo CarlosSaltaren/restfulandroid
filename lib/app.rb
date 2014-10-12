@@ -72,6 +72,11 @@ class WebPageDashBoard < Sinatra::Application
     end
   end
 
+  delete '/messages' do #getting only one message with a specific id
+    id = request['idmessage']
+    MessageHandler.new.delete_messages(id)
+  end
+
 
 
 end

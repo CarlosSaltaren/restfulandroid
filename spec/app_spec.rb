@@ -197,6 +197,36 @@ describe 'WebPageDashBoard' do
           expect(last_response.body).to eq('Have a nice day')
         end
       end
+
+
+      context 'there is a message with ID' do
+        before do
+          post '/messages', {message_text: 'Hi there Martin', expiry_date: '2014-11-30'}.to_json, {'content-type' => 'application/json'}
+          post '/messages', {message_text: 'Hi there Carlos', expiry_date: '2014-11-30'}.to_json, {'content-type' => 'application/json'}
+          post '/messages', {message_text: 'Hi there any world', expiry_date: '2014-11-30'}.to_json, {'content-type' => 'application/json'}
+          post '/messages', {message_text: 'Hi lord of the rings', expiry_date: '2014-11-30'}.to_json, {'content-type' => 'application/json'}
+        end
+
+        it 'should delete a message according ID' do
+          idmessage = last_response.body
+          delete '/messages?idmessage='+idmessage
+          expect(last_response.body).to eq('Message deleted')
+        end
+      end
+
+      context 'there is not any message to delete' do
+        before do
+          post '/messages', {message_text: 'Hi there no message', expiry_date: '2010-11-30'}.to_json, {'content-type' => 'application/json'}
+        end
+        it 'should return Message not found' do
+          delete '/messages?idmessage=xxcodexx'
+          expect(last_response.body).to eq('Message not found')
+        end
+      end
+
+
+
+
     end
   end
 end

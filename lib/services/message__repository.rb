@@ -52,5 +52,15 @@ class MessageRepository
 
   end
 
+  def  delete_messages(id)
+     if @@messageshash.has_key?(id)
+        @@messageshash.delete(id)
+       return true
+     else
+       return false
+    end
+  end
+
+
 
 end

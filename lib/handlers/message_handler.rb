@@ -92,6 +92,17 @@ class MessageHandler
     @status
   end
 
+
+  def delete_messages(id)
+    @respose
+    if MessageRepository.new.delete_messages(id) == true
+      @respose = 'Message deleted'
+    else
+      @respose = 'Message not found'
+    end
+    return @respose
+  end
+
 end
 
 
