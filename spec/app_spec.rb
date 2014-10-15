@@ -116,29 +116,29 @@ describe 'WebPageDashBoard' do
       end
 
 
-      it 'should return all active messages with mock' do
-        message_handler = double(:message_handler)
-        allow(message_handler).to receive(:new).and_return(message_handler)
-        allow(MessageHandler).to receive(:new).and_return(message_handler)
-
-        @messagesTest = Hash.new
-        id1 = 'testcode1'
-        message1 = Message.new 'msg1', Date.today - 1000
-        id2 = 'testcode2'
-        message2 = Message.new 'msg2', Date.today
-
-        @messagesTest[id1] = message1
-        @messagesTest[id2] = message2
-        expect(message_handler).to receive(:get_messages).and_return(@messagesTest)
-        get '/messages'
-        parsed = (JSON.parse(last_response.body))
-        count = 0
-        parsed.each do |key, value|
-          count+=1
-        end
-        expect(count).to eq  2
-
-      end
+      # it 'should return all active messages with mock' do
+      #   message_handler = double(:message_handler)
+      #   allow(message_handler).to receive(:new).and_return(message_handler)
+      #   allow(MessageHandler).to receive(:new).and_return(message_handler)
+      #
+      #   @messagesTest = Hash.new
+      #   id1 = 'testcode1'
+      #   message1 = Message.new 'msg1', Date.today - 1000
+      #   id2 = 'testcode2'
+      #   message2 = Message.new 'msg2', Date.today
+      #
+      #   @messagesTest[id1] = message1
+      #   @messagesTest[id2] = message2
+      #   expect(message_handler).to receive(:get_messages).and_return(@messagesTest)
+      #   get '/messages'
+      #   parsed = (JSON.parse(last_response.body))
+      #   count = 0
+      #   parsed.each do |key, value|
+      #     count+=1
+      #   end
+      #   expect(count).to eq  2
+      #
+      # end
 
 
       it 'should return all active messages without mock' do
@@ -203,7 +203,7 @@ describe 'WebPageDashBoard' do
         before do
           post '/messages', {message_text: 'Hi there Martin', expiry_date: '2014-11-30'}.to_json, {'content-type' => 'application/json'}
           post '/messages', {message_text: 'Hi there Carlos', expiry_date: '2014-11-30'}.to_json, {'content-type' => 'application/json'}
-          post '/messages', {message_text: 'Hi there any world', expiry_date: '2014-11-30'}.to_json, {'content-type' => 'application/json'}
+          post '/messages', {message_text: 'Hi there is a world', expiry_date: '2014-11-30'}.to_json, {'content-type' => 'application/json'}
           post '/messages', {message_text: 'Hi lord of the rings', expiry_date: '2014-11-30'}.to_json, {'content-type' => 'application/json'}
         end
 
