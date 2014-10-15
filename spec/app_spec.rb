@@ -13,6 +13,26 @@ describe 'WebPageDashBoard' do
     WebPageDashBoard
   end
 
+  #Creation for Swinburne UNI
+  describe 'URI: /promotions' do
+    describe 'GET' do
+      #this part will return all the information about places and promotions that we have available.
+      it 'gets all messages about information the message from the message handler' do
+        message_handler = double(:message_handler)
+        allow(message_handler).to receive(:new).and_return(message_handler)
+        allow(MessageHandler).to receive(:new).and_return(message_handler)
+        expect(message_handler).to receive(:get_message).and_return('something')
+        get '/dashboard'
+        expect(last_response.body).to eq 'something'
+      end
+
+
+    end
+  end
+
+
+
+
   # Test the get message endpoing using the mock object
   describe 'URI: /dashboard' do
     describe 'GET' do
